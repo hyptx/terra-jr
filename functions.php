@@ -20,7 +20,7 @@ ter_define_constants(array(
 	'TER_ERROR_DISPLAY_ON' => 		false,
 	'TER_CDN_URL' => 				'//cdnjs.cloudflare.com/ajax/libs/',
 	'TER_JQUERY_VERSION' => 		'1.9.1',
-	'TER_BOOTSTRAP_VERSION' => 		'3.3.6',
+	'TER_BOOTSTRAP_VERSION' => 		'3.3.7',
 	'TER_BS_IMG_RESPONSIVE' => 		'article img,.widget img',
 	'TER_GOOGLE_FONT' => 			'Open+Sans:400,400italic,600,600italic',	
 	/* Layout */
@@ -46,7 +46,7 @@ ter_define_constants(array(
 	'TER_ACTIVATE_BACK_TO_TOP' => 	false,
 	'TER_ACTIVATE_BRANDING' => 		false,
 	'TER_ACTIVATE_CUSTOM_SIDEBAR' =>false,
-	'TER_ACTIVATE_FAVICONS' => 		false,
+	'TER_ACTIVATE_FAVICONS' => 		true,
 	'TER_ACTIVATE_SITE_MOVED' => 	false,
 	'TER_ACTIVATE_SSL' => 			false,
 	'TER_ACTIVATE_SLIDER' => 		false,
@@ -61,6 +61,20 @@ function ter_enqueue_styles(){
 	if(is_admin() && !is_404()) return;	
 	wp_enqueue_style('ter_styles',TERRA . 'style.css');
 	wp_enqueue_style('ter_child_styles',TERRA_CHILD . 'style.css',array('ter_styles'));
+	if($_GET['color']) $theme_color = '#' . $_GET['color'];
+	elseif($_COOKIE['ter_cookie_kuesuto_theme']){
+		$cookie_array = explode(',',$_COOKIE['ter_cookie_kuesuto_theme']);
+		$theme_color = '#' . $cookie_array[0];
+	} 
+	else $theme_color = '#6B7FA9';
+	$custom_css = "
+	#page-wrap #page .theme-color,a,a:hover,a:active,a:focus{color: {$theme_color};}
+	#page-wrap #page .theme-bg-color,#flashcard-nav li.active,.well{background: {$theme_color};}
+	#page-wrap #page .theme-border-bottom{border-bottom: 4px dotted {$theme_color};}
+	.navbar-default .navbar-toggle .icon-bar{background: {$theme_color};}
+	.navbar-default .navbar-toggle{border-color: {$theme_color};}
+	";
+	wp_add_inline_style('ter_child_styles',$custom_css);
 } 
 
 /* Load Custom Functions - Add extras or overwrites in this file ~~~~> */

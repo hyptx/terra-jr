@@ -1,4 +1,65 @@
 <?php
+
+$theme_cookie = new ThemeCookie();
+//$theme_cookie->delete_cookie('cta');
+
+class ThemeCookie{
+	private $_set_cookie_url;
+	public function __construct(){ $this->_set_cookie_url = get_bloginfo('template_directory') . '/set-cookie.php';	}
+	
+	public function print_form($id,$days,$value,$submit,$redirect = '/'){?>
+		<form id="<?php echo 'kuesuto_theme_' . $id . '_' . $value ?>" action="<?php echo $this->_set_cookie_url ?>" enctype="multipart/form-data" method="get" class="kuesuto_theme_form">
+			<input type="hidden" name="id" value="<?php echo $id ?>">
+			<input type="hidden" name="days" value="<?php echo $days ?>">
+			<input type="hidden" name="value" value="<?php echo $value ?>">
+			<input type="submit" name="submit" value="" style="background: #<?php echo $value ?>">
+			<input type="hidden" name="redirect" value="<?php echo $redirect ?>">
+		</form>
+		<?php
+	}
+	
+	public function get_set_cookie_url(){ return $this->_set_cookie_url; }	
+	public function get_cookie($id){ $exploded_cookie = explode(',',$_COOKIE['ter_cookie_' . $id]);	return $exploded_cookie; }	
+	public function delete_cookie($id){ unset($_COOKIE['ter_cookie_' . $id]); setcookie('ter_cookie_' . $id,'',time() -3600,'/' ); }
+}
+
+function ter_enqueue_scripts(){
+	if(is_admin() && !is_404()) return;
+	if(TER_JQUERY_VERSION){
+		wp_deregister_script('jquery');
+		wp_register_script('jquery',TER_CDN_URL . 'jquery/' . TER_JQUERY_VERSION . '/jquery.min.js');
+	}
+	wp_enqueue_script('jquery');
+	wp_enqueue_script('ter_bootstrap_js',TER_CDN_URL . 'twitter-bootstrap/' . TER_BOOTSTRAP_VERSION . '/js/bootstrap.min.js',array('jquery'));
+	if(TER_ACTIVATE_SLIDER) wp_enqueue_script('ter_slider_js',TER_CDN_URL . 'owl-carousel/1.3.2/owl.carousel.min.js',array('jquery'));
+	if(TER_ACTIVATE_SKROLLR) wp_enqueue_script('ter_skrollr_js',TER_CDN_URL . 'skrollr/0.6.29/skrollr.min.js',array('jquery'));
+	if(TER_ACTIVATE_WAYPOINTS) wp_enqueue_script('ter_waypoints',TER_CDN_URL . 'waypoints/2.0.5/waypoints.min.js',array('jquery'));
+	wp_enqueue_script('ter_scripts',TER_JS . 'scripts.js',array('jquery'));
+	//wp_enqueue_script('ter_jmobile',TER_CDN_URL . 'jquery-mobile/1.4.5/jquery.mobile.min.js',array('jquery'));
+}
+
+function ter_navbar_slide($location,$nav_class,$fallback){
+	if(!has_nav_menu($location) && $fallback == false) return;
+	?>	
+	<nav id="<?php echo $location ?>-nav" class="ter-navbar navbar slide-collapse-nav <?php echo $nav_class ?>">
+		<div class="container">		
+			<div id="<?php echo $location ?>-slide-collapse" class="slide-collapse" role="navigation">
+				<ul id="<?php echo $location ?>-nav-ul" class="nav navbar-nav slide-collapse-ul">
+				    <li class="hidden-xs"><a href="/" id="desktop-logo" class="inline-block theme-color"><h2 id="site-title" class="han" data-placement="bottom" data-toggle="tooltip" title="Kuesuto.org">クエスト</h2></a></li>
+					<?php wp_nav_menu(array('fallback_cb' => 'ter_navbar_fallback','theme_location' => $location,'container' => false,'items_wrap' => '%3$s','walker' => new TerWalkerNavMenu())) ?>
+				</ul>
+			</div>			
+			<div class="navbar-header text-center relative visible-xs">
+				<button type="button" class="navbar-toggle absolute" onclick="terNavAnimate('#<?php echo $location ?>-slide-collapse','<?php echo $location ?>'); return false;"> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
+				<!-- For Image Button, comment out button above -->
+				<!--<a href="#" class="navbar-toggle-image absolute" onclick="terNavAnimate('#<?php echo $location ?>-slide-collapse','<?php echo $location ?>'); return false;"><img src="<?php echo TER_GRAPHICS ?>btn-menu.png" class="menu-button" alt="Open Menu"></a>-->
+				<a href="/" id="mobile-logo" class="inline-block theme-color" title="Kuesuto.org"><h2 id="site-title" class="han">クエスト</h2></a>            
+			</div>					
+		</div>
+	</nav>
+    <?php
+}
+
 /* <~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~< Extras >~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~> */
 
 /* Custom Post Types - Uncomment to start creating easy CTP's ~~~~> */

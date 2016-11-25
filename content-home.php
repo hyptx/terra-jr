@@ -4,9 +4,20 @@
 		<?php the_content() ?>
 		<div class="row">
 			<div class="col-sm-12">
-				<h3><em>content-home.php</em></h3>
-				<p>This is the <em>content-home-page.php</em> template. This template has hard-coded content below the dynamic content printed by Wordpress. Just remove this HTML if you don't need additional hard-coded HTML. An alternative would be to just create your own home page template with a content template to boot.</p>
+
+
 			</div>
 		</div>
 	</div><!-- .entry-content --> 
 </article><!-- #post-0 -->
+
+<script>  
+jQuery(document).ready(function() {  
+   jQuery("#character-swipe").swiperight(function() {  
+      jQuery("#character-swipe").carousel('prev');  
+    });  
+   jQuery("#character-swipe").swipeleft(function() {  
+      jQuery("#character-swipe").carousel('next');  
+   });  
+});  
+</script> 

@@ -19,17 +19,43 @@
 	<script src="<?php echo TER_JS ?>html5.js" type="text/javascript"></script>
     <script src="<?php echo TER_JS ?>respond.min.js" type="text/javascript"></script>
 <![endif]-->
+<script type="text/javascript">
+//jQuery Mobile
+jQuery(document).on("mobileinit", function(){ jQuery.extend(jQuery.mobile,{ ajaxEnabled: false, pushStateEnabled: false,autoInitializePage: false });
+    }); </script>
+<script type='text/javascript' src='//cdnjs.cloudflare.com/ajax/libs/jquery-mobile/1.4.5/jquery.mobile.min.js'></script>
+<script type='text/javascript'>
+//Typekit Load
+  (function() {
+    var config = {
+      kitId: 'aco6yvg',
+      scriptTimeout: 3000
+    };
+    var h = document.getElementsByTagName('html')[0];
+    h.className += ' wf-loading';
+    var t = setTimeout(function() {
+      h.className = h.className.replace(/(\s|^)wf-loading(\s|$)/g, ' ');
+      h.className += ' wf-inactive';
+    }, config.scriptTimeout);
+    var d = false;
+    var tk = document.createElement('script');
+    tk.src = '//use.typekit.net/' + config.kitId + '.js';
+    tk.type = 'text/javascript';
+    tk.async = 'true';
+    tk.onload = tk.onreadystatechange = function() {
+      var rs = this.readyState;
+      if (d || rs && rs != 'complete' && rs != 'loaded') return;
+      d = true;
+      clearTimeout(t);
+      try { Typekit.load(config); } catch (e) {}
+    };
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(tk, s);
+  })();
+</script>
+<script type="text/javascript">jQuery(function () { jQuery('[data-toggle="tooltip"]').tooltip()})</script>
 </head>
 <body <?php body_class() ?>>
 <div id="page-wrap"><!-- Closes in footer -->
 	<div id="page">
 		<?php ter_nav('slide','header','navbar-default navbar-static-top header-navbar') //See 'terra/includes/template-tags.php' for nav options ?>
-		<header id="branding" role="banner" class="relative">
-			<div class="container">
-				<div class="row">
-					<div id="branding-left" class="col-sm-7"><?php ter_header_home_link() ?></div>
-					<div id="branding-right" class="col-sm-5 text-right"><?php get_search_form() ?></div>
-				</div>
-			</div>
-		</header>
-		<?php ter_nav('standard','primary','navbar-default navbar-static-top',1) ?>
