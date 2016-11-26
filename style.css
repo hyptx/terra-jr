@@ -16,7 +16,7 @@ Template: terra
 .wf-active .han{opacity: 1}
 .responsive-neg-margin{margin-left: -15px; margin-right: -15px}
 html{font-size: 100%}
-body{font-style: normal; font-weight: 400; font-size: 16px}
+body{font-style: normal; font-weight: 400; font-size: 15px}
 body,#colophon{background: #444}
 #page{background: #f9f9f9}
 .han{font-family: "source-han-sans-japanese",sans-serif;}
@@ -28,7 +28,7 @@ a:hover,a:active,a:focus{opacity: .86}
 .char-large{font-size:140px; line-height: 140px}
 .char-small{font-size:64px; line-height: 64px}
 .well{padding: 6px; color:#000; border:0; margin-bottom: 0}
-article{margin-bottom:0}
+.no-margin-template article{margin-bottom:0}
 .opacity-light{opacity: .8}
 .complex-trans{font-size:16px; line-height: 64px;}
 
@@ -65,7 +65,7 @@ article{margin-bottom:0}
 
 .reverse-kana-indicator,.swap-kana .main-indicator{display: none;}
 .swap-kana .reverse-kana-indicator{display: inline-block;}
-
+.kana-indicator{font-weight: bold;}
 .romanji-alt{display: none; width:68px; line-height: 16px; font-size: 18px}
 .details-section{display: none; font-size: 14px; padding:8px 0 0;}
 .info-section{font-size: 14px}
@@ -83,6 +83,7 @@ article{margin-bottom:0}
 #theme-options{height: 36px}
 .kuesuto_theme_form{display: block; float: left; width: 12.5%;}
 .kuesuto_theme_form input[type="submit"]{border:0; padding:0; width: 100%; height: 36px;}
+#color-bar{height: 24px}
 
 /* Nav ~~~~> */
 /* Quick Customization - Remove for default Bootstrap >~~~~~~~~> */

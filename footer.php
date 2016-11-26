@@ -1,12 +1,6 @@
 		<?php ter_branding() ?>
 		<?php ter_cta_sidebar(2000,500) ?>
-		<nav id="page-nav" role="contentinfo" class="theme-bg-color">
-			<div class="container">	
-				<div class="row">
-					<div class="col-sm-2">&nbsp;</div>
-				</div><!-- /.row -->
-			</div><!-- /.container -->
-		</nav>
+		<div id="color-bar" class="theme-bg-color"></div>
 		<footer id="colophon">
 			<div id="theme-options">			
 				<?php

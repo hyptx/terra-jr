@@ -9,7 +9,7 @@
 		</div>
 	</div>
 </header><!-- .page-header -->
-<div id="main" class="container">
+<div id="main" class="container no-margin-template">
 	<div id="main-row" class="row">
 		<div id="primary" class="<?php echo TER_FULL_WIDTH_CLASS ?>">
 			<div id="content" role="main">								

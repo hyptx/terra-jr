@@ -30,7 +30,7 @@ ter_define_constants(array(
 	'TER_PRIMARY_CLASS' => 			'col-sm-8',
 	'TER_SECONDARY_CLASS' => 		'col-sm-4',
 	'TER_SECONDARY' => 				'right',
-	'TER_SIDEBARS' => 				'Blog Sidebar,Page Sidebar',
+	'TER_SIDEBARS' => 				'Home Sidebar,Blog Sidebar,Page Sidebar',
 	/* Wordpress */
 	'TER_ADD_HOME_LINK' => 			false,
 	'TER_ADMIN_BAR' => 				'editor',
