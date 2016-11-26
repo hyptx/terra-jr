@@ -23,21 +23,6 @@ class ThemeCookie{
 	public function delete_cookie($id){ unset($_COOKIE['ter_cookie_' . $id]); setcookie('ter_cookie_' . $id,'',time() -3600,'/' ); }
 }
 
-function ter_enqueue_scripts(){
-	if(is_admin() && !is_404()) return;
-	if(TER_JQUERY_VERSION){
-		wp_deregister_script('jquery');
-		wp_register_script('jquery',TER_CDN_URL . 'jquery/' . TER_JQUERY_VERSION . '/jquery.min.js');
-	}
-	wp_enqueue_script('jquery');
-	wp_enqueue_script('ter_bootstrap_js',TER_CDN_URL . 'twitter-bootstrap/' . TER_BOOTSTRAP_VERSION . '/js/bootstrap.min.js',array('jquery'));
-	if(TER_ACTIVATE_SLIDER) wp_enqueue_script('ter_slider_js',TER_CDN_URL . 'owl-carousel/1.3.2/owl.carousel.min.js',array('jquery'));
-	if(TER_ACTIVATE_SKROLLR) wp_enqueue_script('ter_skrollr_js',TER_CDN_URL . 'skrollr/0.6.29/skrollr.min.js',array('jquery'));
-	if(TER_ACTIVATE_WAYPOINTS) wp_enqueue_script('ter_waypoints',TER_CDN_URL . 'waypoints/2.0.5/waypoints.min.js',array('jquery'));
-	wp_enqueue_script('ter_scripts',TER_JS . 'scripts.js',array('jquery'));
-	//wp_enqueue_script('ter_jmobile',TER_CDN_URL . 'jquery-mobile/1.4.5/jquery.mobile.min.js',array('jquery'));
-}
-
 function ter_navbar_slide($location,$nav_class,$fallback){
 	if(!has_nav_menu($location) && $fallback == false) return;
 	?>	
@@ -45,7 +30,7 @@ function ter_navbar_slide($location,$nav_class,$fallback){
 		<div class="container">		
 			<div id="<?php echo $location ?>-slide-collapse" class="slide-collapse" role="navigation">
 				<ul id="<?php echo $location ?>-nav-ul" class="nav navbar-nav slide-collapse-ul">
-				    <li class="hidden-xs"><a href="/" id="desktop-logo" class="inline-block theme-color"><h2 id="site-title" class="han" data-placement="bottom" data-toggle="tooltip" title="Kuesuto.org">クエスト</h2></a></li>
+				    <li class="hidden-xs"><a href="/" id="desktop-logo" class="inline-block theme-color"><h2 id="site-title" class="han" data-placement="bottom" title="Kuesuto.org">クエスト</h2></a></li>
 					<?php wp_nav_menu(array('fallback_cb' => 'ter_navbar_fallback','theme_location' => $location,'container' => false,'items_wrap' => '%3$s','walker' => new TerWalkerNavMenu())) ?>
 				</ul>
 			</div>			

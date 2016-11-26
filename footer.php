@@ -23,7 +23,7 @@
 			</div>		
 			<div class="container">	
 				<div class="row hidden-xs">					
-					<div class="col-sm-12"><div id="copyright"><?php echo TER_COPYRIGHT ?></div></div>
+					<div class="col-sm-12"><div id="copyright"><a href="/sitemap/">Sitemap</a><span>&nbsp;&nbsp;|&nbsp;&nbsp;</span><?php echo TER_COPYRIGHT ?></div></div>
 				</div><!-- /.row -->
 			</div><!-- /.container -->
 		</footer>

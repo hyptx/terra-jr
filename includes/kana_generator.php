@@ -3,8 +3,9 @@
 * KanaGenerator
 */
 class KanaGenerator{
-	private $_kana_array,$_character_count;
-	public function __construct(){
+	private $_kana_type,$_kana_array,$_character_count;
+	public function __construct($kana_type){
+		$this->_kana_type = $kana_type;
 		$this->store_data();
 	}
 
@@ -127,11 +128,16 @@ class KanaGenerator{
 			['ぴょ', 'ピョ', 'pyo', '', '', 		'Digraphs/Diacritics', 'p', 'yo'], 
 		];
 		$this->_character_count = count($this->_kana_array);
-		if($_GET['random'] == 1) $this->shuffle_flashcards();
+		$this->prepare_flashcards();
 	}
 
-	public function print_flashcards(){ ////[] = Hiragana[0],Katakana[1],Hepburn[2],Nihon-shiki[3],Kunrei-shiki[4],section[5],consonant[6],vowel[7]
-		$i = 0;		
+	private function prepare_flashcards(){ 
+		if($_GET['random'] == 1) $this->shuffle_array();
+	}
+
+	public function print_flashcards(){
+		//[] = Hiragana[0],Katakana[1],Hepburn[2],Nihon-shiki[3],Kunrei-shiki[4],section[5],consonant[6],vowel[7]
+		$i = 0;
 		foreach($this->_kana_array as $kana){
 			if($i == 0) $active = ' active';
 			else $active = '';
@@ -141,15 +147,23 @@ class KanaGenerator{
 				case 'rdv': $translation = '<span class="complex-trans">Reduplicates/Voices</span>'; break;
 				default: $translation = $kana[2]; break;
 			}
+			if($this->_kana_type == 'hiragana'){
+				$hiragana_indicator = 'main-indicator';
+				$katakana_indicator = 'reverse-kana-indicator';
+			}
+			else{
+				$hiragana_indicator = 'reverse-kana-indicator';
+				$katakana_indicator = 'main-indicator';
+			}
 			?>
-			<div class="item<?php echo $active ?> flashcard"> 
+			<div class="item<?php echo $active ?> flashcard type-<?php echo $this->_kana_type ?>"> 
 				<div class="character-section">
-					<span class="character han character-hiragana text-150 theme-border-bottom"><?php echo $kana[0] ?></span>
-					<span class="character han character-katakana text-150 theme-border-bottom"><?php echo $kana[1] ?></span>
+					<span class="character han character-hiragana char-large theme-border-bottom"><?php echo $kana[0] ?></span>
+					<span class="character han character-katakana char-large theme-border-bottom"><?php echo $kana[1] ?></span>
 				</div>
 				<div class="translation-section">
 					<?php if($kana[3]) echo '<div class="romanji-alt nihon-alt"><span class="opacity-light">Nihon</span><br><span class="uppercase bold">' .  $kana[3] . '</span></div>';	?>
-					<span class="translation uppercase text-64"><?php echo $translation ?></span>
+					<span class="translation uppercase char-small"><?php echo $translation ?></span>
 					<?php if($kana[4]) echo '<div class="romanji-alt kunrei-alt"><span class="opacity-light">Kunrei</span><br><span class="uppercase bold">' . $kana[4] . '</span></div>'; ?>
 				</div>
 				<div class="details-section">
@@ -162,7 +176,7 @@ class KanaGenerator{
 				<div class="info-section">
 					<div class="row">
 						<div class="col-xs-6 text-left">
-							<a href="https://en.wikipedia.org/wiki/<?php echo $kana[0] ?>" target="_blank" title="Kana Info" class="kana-indicator main-indicator"><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> Hiragana</a><a href="https://en.wikipedia.org/wiki/<?php echo $kana[1] ?>" target="_blank" title="Kana Info" class="kana-indicator reverse-kana-indicator"><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> Katakana</a>
+							<a href="https://en.wikipedia.org/wiki/<?php echo $kana[0] ?>" target="_blank" title="Kana Info" class="kana-indicator <?php echo $hiragana_indicator ?>"><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> Hiragana</a><a href="https://en.wikipedia.org/wiki/<?php echo $kana[1] ?>" target="_blank" title="Kana Info" class="kana-indicator <?php echo $katakana_indicator ?>"><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> Katakana</a>
 						</div>
 						<div class="col-xs-6 text-right">
 							<?php echo ($i + 1) . ' of ' . $this->_character_count ?>
@@ -179,14 +193,16 @@ class KanaGenerator{
 		$i = 0;
 		echo '<ul id="flashcard-nav" class="carousel-indicators">';
 		foreach($this->_kana_array as $kana){
-			if($i == 0) echo '<li data-target="#flashcard-swipe" data-slide-to="0" class="active han" title="' . $kana[2] . '">' . $kana[0] . '</li>';
-			else echo '<li data-target="#flashcard-swipe" data-slide-to="' . $i . '" class="han" title="' . $kana[2] . '">' . $kana[0] . '</li>';
+			if($this->_kana_type == 'hiragana')	$character = $kana[0];
+			else $character = $kana[1];
+			if($i == 0) echo '<li data-target="#flashcard-swipe" data-slide-to="0" class="active han" title="' . $kana[2] . '">' . $character . '</li>';
+			else echo '<li data-target="#flashcard-swipe" data-slide-to="' . $i . '" class="han" title="' . $kana[2] . '">' . $character . '</li>';
 			$i++;
 		}
 		echo '</ol>';
 	}
 
-	private function shuffle_flashcards(){ 
+	private function shuffle_array(){ 
   		$keys = array_keys($this->_kana_array); 
   		shuffle($keys); 
   		$randomized_array = array(); 

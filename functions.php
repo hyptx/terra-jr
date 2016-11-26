@@ -41,7 +41,7 @@ ter_define_constants(array(
 	'TER_MAX_IMAGE_SIZE_KB' => 		1024,
 	'TER_WP_POST_FORMATS' => 		false,
 	'TER_GF_BUTTON_CLASS' =>		'btn btn-info',
-	'TER_COPYRIGHT' =>				'&copy; ' . date('Y ') . get_bloginfo('name'),
+	'TER_COPYRIGHT' =>				'<span>&copy; ' . date('Y ') . get_bloginfo('name') . '</span>',
 	/* Features */
 	'TER_ACTIVATE_BACK_TO_TOP' => 	false,
 	'TER_ACTIVATE_BRANDING' => 		false,
@@ -55,6 +55,22 @@ ter_define_constants(array(
 	'TER_ACTIVATE_SKROLLR' => 		false
 ));
 /* END <~~~~~~~< Theme Options */
+
+/* Enqueue Scripts ~~> */
+function ter_enqueue_scripts(){
+	if(is_admin() && !is_404()) return;
+	if(TER_JQUERY_VERSION){
+		wp_deregister_script('jquery');
+		wp_register_script('jquery',TER_CDN_URL . 'jquery/' . TER_JQUERY_VERSION . '/jquery.min.js');
+	}
+	wp_enqueue_script('jquery');
+	wp_enqueue_script('ter_bootstrap_js',TER_CDN_URL . 'twitter-bootstrap/' . TER_BOOTSTRAP_VERSION . '/js/bootstrap.min.js',array('jquery'));
+	if(TER_ACTIVATE_SLIDER) wp_enqueue_script('ter_slider_js',TER_CDN_URL . 'owl-carousel/1.3.2/owl.carousel.min.js',array('jquery'));
+	if(TER_ACTIVATE_SKROLLR) wp_enqueue_script('ter_skrollr_js',TER_CDN_URL . 'skrollr/0.6.29/skrollr.min.js',array('jquery'));
+	if(TER_ACTIVATE_WAYPOINTS) wp_enqueue_script('ter_waypoints',TER_CDN_URL . 'waypoints/2.0.5/waypoints.min.js',array('jquery'));
+	wp_enqueue_script('ter_scripts',TER_JS . 'scripts.js',array('jquery'));
+	wp_enqueue_script('ter_child_scripts',TER_CHILD_JS . 'scripts.js',array('jquery'),'',1);
+}
 
 /* Enqueue Styles - Load theme css ~~> */
 function ter_enqueue_styles(){

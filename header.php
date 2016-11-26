@@ -53,7 +53,6 @@ jQuery(document).on("mobileinit", function(){ jQuery.extend(jQuery.mobile,{ ajax
     s.parentNode.insertBefore(tk, s);
   })();
 </script>
-<script type="text/javascript">jQuery(function () { jQuery('[data-toggle="tooltip"]').tooltip()})</script>
 </head>
 <body <?php body_class() ?>>
 <div id="page-wrap"><!-- Closes in footer -->

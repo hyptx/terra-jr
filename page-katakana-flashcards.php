@@ -17,8 +17,8 @@
 					<div class="entry-content">
 						<?php the_content() ?>
 						<?php require(TER_CHILD_INCLUDES . 'kana_generator.php') ?>
-						<?php $kana_generator = new KanaGenerator('hiragana') ?>
-						<div id="flashcard-swipe" class="carousel slide type-hiragana" data-ride="carousel" data-interval="false">
+						<?php $kana_generator = new KanaGenerator('katakana') ?>
+						<div id="flashcard-swipe" class="carousel slide type-katakana" data-ride="carousel" data-interval="false">
   							<div class="carousel-inner" role="listbox"><?php $kana_generator->print_flashcards() ?></div>
 						  	<div id="flashcard-control-bar" class="text-center">
 								<a class="flashcard-prev" href="#flashcard-swipe" role="button" data-slide="prev">
