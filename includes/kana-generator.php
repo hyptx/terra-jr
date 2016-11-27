@@ -62,7 +62,7 @@ class KanaGenerator{
 			['を', 'ヲ', 'o', 'wo', 'o', 		'Monographs(Gojūon)', 'w', 'o'], 
 			['ん', 'ン', 'n', 'n-n', 'n-n', 	'Monographs(Gojūon)', '*', '*'], 
 			['っ', 'ッ', 'gc', '', '', 		'Monographs(Gojūon)', '*', '*'],
-			['ゝ', 'ゝ', 'rduv', '', '', 		'Monographs(Gojūon)', '*', '*'],
+			['ゝ', 'ゝ', 'rdu', '', '', 		'Monographs(Gojūon)', '*', '*'],
 			['ゞ', 'ゞ', 'rdv', '', '', 		'Monographs(Gojūon)', '*', '*'],
 			['が', 'ガ', 'ga', '', '', 		'Diacritics(Gojūon/Handakuten)', 'g', 'a'], 
 			['ぎ', 'ギ', 'gi', '', '', 		'Diacritics(Gojūon/Handakuten)', 'g', 'i'], 
@@ -201,6 +201,141 @@ class KanaGenerator{
 		}
 		echo '</ol>';
 	}
+
+	public function print_nav_anchors(){?>
+		<div class="theme-bg-color text-center bold anchor-indicators">
+			<div class="bg-overlay-7">
+				<div class="container">
+					<div class="row">
+						<div class="col-sm-12">
+						<?php
+						$i = 0;
+						echo '<ul id="flashcard-nav" class="carousel-indicators">';
+						foreach($this->_kana_array as $kana){
+							if($this->_kana_type == 'hiragana')	$character = $kana[0];
+							else $character = $kana[1];
+							echo '<li class="han" title="' . $kana[2] . '"><a href="#char-' . $i . '">' . $character . '</a></li>';
+							$i++;
+						}
+						echo '</ol>';
+						?>
+					</div>
+				</div>
+			</div>
+		</div>		
+		<?php		
+	}
+
+	public function print_characters(){
+		//[] = Hiragana[0],Katakana[1],Hepburn[2],Nihon-shiki[3],Kunrei-shiki[4],section[5],consonant[6],vowel[7]
+		?>
+		<div id="character-list" class="character-list-<?php echo $this->_kana_type ?> text-center font-resize responsive-neg-margin">
+			<?php $i = 0; foreach($this->_kana_array as $kana):
+			
+			if($this->_kana_type == 'hiragana'){
+				$character = $kana[0];
+				$character_alt = $kana[1];
+			}	
+			else{
+				$character = $kana[1];
+				$character_alt = $kana[0];
+			} 
+			?>		
+			<div id="char-<?php echo $i ?>" class="character-tile theme-bg-color theme-border-color rounded-8" onclick="toggleCharTile(this);">
+				<div class="character-bg-overlay rounded-12 bg-overlay">
+					<span class="tile-type hiragana-label">H</span>
+					<span class="tile-type katakana-label">K</span>
+					<div class="character han theme-border-bottom"><?php echo $character ?></div>
+					<div class="character character-alt han theme-border-bottom"><?php echo $character_alt ?></div>
+					<div class="translation"><?php echo $kana[2] ?></div>
+				</div>
+			</div>
+			<?php $i++; endforeach ?>
+		</div>
+		<script type="text/javascript">
+			jQuery(function(){
+			  	jQuery(".character-tile").bind("taphold", tapholdHandler);			 
+			  function tapholdHandler(event){ window.location.href = '/learn-hiragana/#' + jQuery(this).attr('id'); 
+				}
+			});
+		</script>
+		<?php
+	}
+
+	public function print_characters_with_details(){
+		//[] = Hiragana[0],Katakana[1],Hepburn[2],Nihon-shiki[3],Kunrei-shiki[4],section[5],consonant[6],vowel[7]
+		$i = 0;
+		?>
+		<div id="character-list" class="character-detailed-list-<?php echo $this->_kana_type ?> text-center">
+			<?php foreach($this->_kana_array as $kana):
+			if($this->_kana_type == 'hiragana'){
+				$character = $kana[0];
+				$character_alt = $kana[1];
+			}	
+			else{
+				$character = $kana[1];
+				$character_alt = $kana[0];
+			} 
+			?>		
+			<div id="char-<?php echo $i ?>" class="character-with-detials">
+				<div class="character han theme-border-bottom inline-block"><?php echo $character ?></div>
+				<div class="translation-section">
+					<?php if($kana[3]) echo '<div class="romanji-alt nihon-alt"><span class="opacity-light">Nihon</span><br><span class="uppercase bold">' .  $kana[3] . '</span></div>';	?>
+					<span class="translation uppercase char-small"><?php echo $kana[2] ?></span>
+					<?php if($kana[4]) echo '<div class="romanji-alt kunrei-alt"><span class="opacity-light">Kunrei</span><br><span class="uppercase bold">' . $kana[4] . '</span></div>'; ?>
+				</div>
+				<div class="translation-details">
+					<div class="row">
+						<div class="col-xs-2 text-left uppercase"><?php echo $kana[6] ?></div>
+						<div class="col-xs-8 text-center"><?php echo $kana[5] ?></div>
+						<div class="col-xs-2 text-right uppercase"><?php echo $kana[7] ?></div>
+					</div>
+				</div>
+				<div class="info-section">
+					<div class="row">
+						<div class="col-xs-6 text-left">
+							<a href="https://en.wikipedia.org/wiki/<?php echo $kana[0] ?>" target="_blank" title="Kana Info" class="kana-indicator"><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> Wikipedia Info</a>
+						</div>
+						<div class="col-xs-6 text-right">
+							<?php echo ($i + 1) . ' of ' . $this->_character_count ?>
+						</div>
+					</div>
+				</div>
+			</div>
+			<hr>
+			<?php $i++; endforeach ?>
+		</div>
+		<?php
+	}
+
+	public function print_resize_buttons(){?>
+		<div class="resize-buttons theme-bg-color text-center bold">
+			<div class="bg-overlay-7">
+				<div class="container">
+					<div class="row">
+						<div class="col-sm-12">
+							<span class="glyphicon glyphicon-text-height" aria-hidden="true"></span>&nbsp;&nbsp;
+							<a href="?resize=2" class="<?php if($_GET['resize'] == 2) echo 'active' ?>">2</a>
+							<a href="?resize=4" class="<?php if($_GET['resize'] == 4) echo 'active' ?>">4</a>
+							<a href="?resize=6" class="<?php if($_GET['resize'] == 6) echo 'active' ?>">6</a>
+							<a href="?resize=8" class="<?php if($_GET['resize'] == 8) echo 'active' ?>">8</a>
+							<a href="?resize=10" class="<?php if($_GET['resize'] == 10) echo 'active' ?>">10</a>
+							<a href="?resize=12" class="<?php if($_GET['resize'] == 12 || !$_GET['resize']) echo 'active' ?>">12</a>
+							<a href="?resize=14" class="<?php if($_GET['resize'] == 14) echo 'active' ?>">14</a>
+							<a href="?resize=16" class="<?php if($_GET['resize'] == 16) echo 'active' ?>">16</a>
+							<a href="?resize=20" class="<?php if($_GET['resize'] == 20) echo 'active' ?>">20</a>
+							<a href="?resize=24" class="<?php if($_GET['resize'] == 24) echo 'active' ?>">24</a>
+							<a href="?resize=36" class="<?php if($_GET['resize'] == 36) echo 'active' ?>">36</a>
+							<a href="?resize=48" class="<?php if($_GET['resize'] == 48) echo 'active' ?>">48</a>
+							<a href="?resize=64" class="<?php if($_GET['resize'] == 64) echo 'active' ?>">64</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<?php
+	}
+
 
 	private function shuffle_array(){ 
   		$keys = array_keys($this->_kana_array); 

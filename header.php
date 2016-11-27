@@ -53,6 +53,7 @@ jQuery(document).on("mobileinit", function(){ jQuery.extend(jQuery.mobile,{ ajax
     s.parentNode.insertBefore(tk, s);
   })();
 </script>
+<meta name="google-site-verification" content="MFDDM8eAIcEdoueliJAs7aPWprNwzJVpqkz3iP9oj6Q" />
 </head>
 <body <?php body_class() ?>>
 <div id="page-wrap"><!-- Closes in footer -->

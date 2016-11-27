@@ -15,4 +15,8 @@ function toggleKana(){
 
 function toggleRomanji(){
     jQuery('#flashcard-swipe').toggleClass('show-details');
-}				
+}
+
+function toggleCharTile(element){
+    jQuery(element).toggleClass('tile-alt');
+}			

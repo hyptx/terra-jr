@@ -16,7 +16,7 @@
 				<article id="post-<?php the_ID() ?>" <?php post_class() ?>>					
 					<div class="entry-content">
 						<?php the_content() ?>
-						<?php require(TER_CHILD_INCLUDES . 'kana_generator.php') ?>
+						<?php require(TER_CHILD_INCLUDES . 'kana-generator.php') ?>
 						<?php $kana_generator = new KanaGenerator('katakana') ?>
 						<div id="flashcard-swipe" class="carousel slide type-katakana" data-ride="carousel" data-interval="false">
   							<div class="carousel-inner" role="listbox"><?php $kana_generator->print_flashcards() ?></div>

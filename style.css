@@ -31,6 +31,10 @@ a:hover,a:active,a:focus{opacity: .86}
 .no-margin-template article{margin-bottom:0}
 .opacity-light{opacity: .8}
 .complex-trans{font-size:16px; line-height: 64px;}
+.bg-overlay{background: rgba(255,255,255,.9)}
+.bg-overlay-7{background: rgba(255,255,255,.7)}
+#primary{padding-top: 15px}
+article{margin-bottom: 15px}
 
 /* Header ~~~~> */
 .app-title {color:#fff; font-size: 24px; opacity: .6}
@@ -39,7 +43,7 @@ a:hover,a:active,a:focus{opacity: .86}
 .ui-loader{display: none}
 
 /* Home ~~~~> */
-/* Content ~~~~> */
+/* Flashcards ~~~~> */
 .flashcard{text-align: center;}
 .carousel-control{display: none}
 .carousel-inner > .item{-webkit-transition: .25s ease-in-out left; -o-transition: .25s ease-in-out left; transition: .25s ease-in-out left;}
@@ -56,13 +60,10 @@ a:hover,a:active,a:focus{opacity: .86}
 #flashcard-nav li{list-style-type: none; display: inline-block; cursor: pointer; font-size: 20px; padding: 3px; width: 55px; background-color: none; border: 0; height: auto; margin: 0; text-indent: 0; border-radius:16px; -webkit-border-radius:16px;}
 #page #flashcard-nav li.active{color:#fff; background: #444}
 .kana-indicator{display: inline-block;}
-
 .type-hiragana .character-hiragana,.type-hiragana .swap-kana .character-katakana{display: inline-block; opacity: 1}
 .swap-kana .character-hiragana,.type-hiragana .character-katakana{display: none; opacity: 0}
-
 .type-katakana .character-katakana,.type-katakana .swap-kana .character-hiragana{display: inline-block; opacity: 1}
 .swap-kana .character-katakana,.type-katakana .character-hiragana{display: none; opacity: 0}
-
 .reverse-kana-indicator,.swap-kana .main-indicator{display: none;}
 .swap-kana .reverse-kana-indicator{display: inline-block;}
 .kana-indicator{font-weight: bold;}
@@ -74,7 +75,29 @@ a:hover,a:active,a:focus{opacity: .86}
 .romanji-alt .opacity-light{font-size: 13px}
 #flashcard-control-bar .tooggle-details-minus,.show-details #flashcard-control-bar .tooggle-details-plus{display: none;}
 .show-details #flashcard-control-bar .tooggle-details-minus{display: inline-block;}
-    
+
+/* Character List ~~~~> */   
+.character-tile{position: relative; display:inline-block; margin: .5em; border-width: 2px; border-style: solid; cursor: pointer; }
+.character-bg-overlay{padding: .7em;}
+.character{font-size: 8em; padding:.1em .1em .2em; line-height: 1em}
+.translation{font-size: 4em; padding:0.3em .1em .2em; line-height: 1em; text-transform: uppercase;}
+.resize-buttons a{display: inline-block; padding: 6px 8px; margin-right: -4px}
+.resize-buttons a:hover,.resize-buttons a.active{background: #444; color:#fff;}
+.tile-alt .bg-overlay{background: rgba(255,255,255,.7)}
+.character-alt{display: none}
+.tile-alt .character{display: none;}
+.tile-alt .character-alt{display: inline-block;}
+
+.character-tile .tile-type{display:none; font-weight: bold; position: absolute; top:3px; right:6px;}
+.character-list-hiragana .tile-type.hiragana-label{display: inline-block;}
+.character-list-katakana .tile-type.katakana-label{display: inline-block;}
+.character-list-hiragana .tile-alt .tile-type.hiragana-label{display: none}
+.character-list-hiragana .tile-alt .tile-type.katakana-label{display: inline-block;}
+.character-list-katakana .tile-alt .tile-type.katakana-label{display: none}
+.character-list-katakana .tile-alt .tile-type.hiragana-label{display: inline-block;}
+#character-list .romanji-alt{display: inline-block;}
+.anchor-indicators .col-sm-12{padding:16px 0 }
+.anchor-indicators a{color:#000;}
 
 /* Sidebar ~~~~> */
 /* Footer ~~~~> */

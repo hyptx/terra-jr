@@ -9,7 +9,7 @@
 				$theme_cookie->print_form('kuesuto_theme',30,'647857','submit',$_SERVER['REQUEST_URI']);
 				$theme_cookie->print_form('kuesuto_theme',30,'8B628E','submit',$_SERVER['REQUEST_URI']);
 				$theme_cookie->print_form('kuesuto_theme',30,'8B765C','submit',$_SERVER['REQUEST_URI']);
-				$theme_cookie->print_form('kuesuto_theme',30,'DAD4BD','submit',$_SERVER['REQUEST_URI']);
+				$theme_cookie->print_form('kuesuto_theme',30,'B7AF90','submit',$_SERVER['REQUEST_URI']);
 				$theme_cookie->print_form('kuesuto_theme',30,'9DC691','submit',$_SERVER['REQUEST_URI']);
 				$theme_cookie->print_form('kuesuto_theme',30,'53A8B0','submit',$_SERVER['REQUEST_URI']);
 				$theme_cookie->print_form('kuesuto_theme',30,'559BE4','submit',$_SERVER['REQUEST_URI']);

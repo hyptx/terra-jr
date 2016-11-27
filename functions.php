@@ -37,13 +37,13 @@ ter_define_constants(array(
 	'TER_ADMIN_BAR_LOGIN' => 		false,
 	'TER_EXCERPT' => 				false,
 	'TER_EXCERPT_LEN' => 			40,
-	'TER_TITLE_FORMAT_DEFAULT' => 	false,
+	'TER_TITLE_FORMAT_DEFAULT' => 	true,
 	'TER_MAX_IMAGE_SIZE_KB' => 		1024,
 	'TER_WP_POST_FORMATS' => 		false,
 	'TER_GF_BUTTON_CLASS' =>		'btn btn-info',
 	'TER_COPYRIGHT' =>				'<span>&copy; ' . date('Y ') . get_bloginfo('name') . '</span>',
 	/* Features */
-	'TER_ACTIVATE_BACK_TO_TOP' => 	false,
+	'TER_ACTIVATE_BACK_TO_TOP' => 	true,
 	'TER_ACTIVATE_BRANDING' => 		false,
 	'TER_ACTIVATE_CUSTOM_SIDEBAR' =>false,
 	'TER_ACTIVATE_FAVICONS' => 		true,
@@ -83,12 +83,15 @@ function ter_enqueue_styles(){
 		$theme_color = '#' . $cookie_array[0];
 	} 
 	else $theme_color = '#6B7FA9';
+	if($_GET['resize']) $font_resize = $_GET['resize'];
+	else $font_resize = 12;
 	$custom_css = "
 	#page-wrap #page .theme-color,a,a:hover,a:active,a:focus{color: {$theme_color};}
 	#page-wrap #page .theme-bg-color,#flashcard-nav li.active,.well{background: {$theme_color};}
-	#page-wrap #page .theme-border-bottom{border-bottom: 4px dotted {$theme_color};}
+	#page-wrap #page .theme-border-bottom{border-bottom: 1px solid {$theme_color};}
 	.navbar-default .navbar-toggle .icon-bar{background: {$theme_color};}
-	.navbar-default .navbar-toggle{border-color: {$theme_color};}
+	.navbar-default .navbar-toggle,.theme-border-color{border-color: {$theme_color};}
+	.font-resize{font-size: {$font_resize}px;}
 	";
 	wp_add_inline_style('ter_child_styles',$custom_css);
 } 
