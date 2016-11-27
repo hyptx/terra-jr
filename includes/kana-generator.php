@@ -156,14 +156,15 @@ class KanaGenerator{
 				$katakana_indicator = 'main-indicator';
 			}
 			?>
-			<div class="item<?php echo $active ?> flashcard type-<?php echo $this->_kana_type ?>"> 
-				<div class="character-section">
-					<span class="character han character-hiragana char-large theme-border-bottom"><?php echo $kana[0] ?></span>
-					<span class="character han character-katakana char-large theme-border-bottom"><?php echo $kana[1] ?></span>
+			<div class="item<?php echo $active ?> flashcard type-<?php echo $this->_kana_type ?>">
+
+				<div class="character-section" onclick="toggleKana();">
+					<span class="character nihongo character-hiragana theme-border-bottom"><?php echo $kana[0] ?></span>
+					<span class="character nihongo character-katakana theme-border-bottom"><?php echo $kana[1] ?></span>
 				</div>
-				<div class="translation-section">
+				<div class="translation-section" onclick="toggleKana();">
 					<?php if($kana[3]) echo '<div class="romanji-alt nihon-alt"><span class="opacity-light">Nihon</span><br><span class="uppercase bold">' .  $kana[3] . '</span></div>';	?>
-					<span class="translation uppercase char-small"><?php echo $translation ?></span>
+					<span class="translation uppercase"><?php echo $translation ?></span>
 					<?php if($kana[4]) echo '<div class="romanji-alt kunrei-alt"><span class="opacity-light">Kunrei</span><br><span class="uppercase bold">' . $kana[4] . '</span></div>'; ?>
 				</div>
 				<div class="details-section">
@@ -173,6 +174,7 @@ class KanaGenerator{
 						<div class="col-xs-2 text-right uppercase"><?php echo $kana[7] ?></div>
 					</div>
 				</div>
+
 				<div class="info-section">
 					<div class="row">
 						<div class="col-xs-6 text-left">
@@ -195,15 +197,15 @@ class KanaGenerator{
 		foreach($this->_kana_array as $kana){
 			if($this->_kana_type == 'hiragana')	$character = $kana[0];
 			else $character = $kana[1];
-			if($i == 0) echo '<li data-target="#flashcard-swipe" data-slide-to="0" class="active han" title="' . $kana[2] . '">' . $character . '</li>';
-			else echo '<li data-target="#flashcard-swipe" data-slide-to="' . $i . '" class="han" title="' . $kana[2] . '">' . $character . '</li>';
+			if($i == 0) echo '<li data-target="#flashcard-swipe" data-slide-to="0" class="active nihongo" title="' . $kana[2] . '">' . $character . '</li>';
+			else echo '<li data-target="#flashcard-swipe" data-slide-to="' . $i . '" class="nihongo" title="' . $kana[2] . '">' . $character . '</li>';
 			$i++;
 		}
 		echo '</ol>';
 	}
 
 	public function print_nav_anchors(){?>
-		<div class="theme-bg-color text-center bold anchor-indicators">
+		<div class="theme-bg-color text-center anchor-indicators anchors">
 			<div class="bg-overlay-7">
 				<div class="container">
 					<div class="row">
@@ -214,7 +216,7 @@ class KanaGenerator{
 						foreach($this->_kana_array as $kana){
 							if($this->_kana_type == 'hiragana')	$character = $kana[0];
 							else $character = $kana[1];
-							echo '<li class="han" title="' . $kana[2] . '"><a href="#char-' . $i . '">' . $character . '</a></li>';
+							echo '<li class="nihongo" title="' . $kana[2] . '"><a href="#char-' . $i . '">' . $character . '</a></li>';
 							$i++;
 						}
 						echo '</ol>';
@@ -245,8 +247,8 @@ class KanaGenerator{
 				<div class="character-bg-overlay rounded-12 bg-overlay">
 					<span class="tile-type hiragana-label">H</span>
 					<span class="tile-type katakana-label">K</span>
-					<div class="character han theme-border-bottom"><?php echo $character ?></div>
-					<div class="character character-alt han theme-border-bottom"><?php echo $character_alt ?></div>
+					<div class="character nihongo theme-border-bottom"><?php echo $character ?></div>
+					<div class="character character-alt nihongo theme-border-bottom"><?php echo $character_alt ?></div>
 					<div class="translation"><?php echo $kana[2] ?></div>
 				</div>
 			</div>
@@ -278,10 +280,10 @@ class KanaGenerator{
 			} 
 			?>		
 			<div id="char-<?php echo $i ?>" class="character-with-detials">
-				<div class="character han theme-border-bottom inline-block"><?php echo $character ?></div>
+				<div class="character nihongo theme-border-bottom inline-block"><?php echo $character ?></div>
 				<div class="translation-section">
 					<?php if($kana[3]) echo '<div class="romanji-alt nihon-alt"><span class="opacity-light">Nihon</span><br><span class="uppercase bold">' .  $kana[3] . '</span></div>';	?>
-					<span class="translation uppercase char-small"><?php echo $kana[2] ?></span>
+					<span class="translation uppercase"><?php echo $kana[2] ?></span>
 					<?php if($kana[4]) echo '<div class="romanji-alt kunrei-alt"><span class="opacity-light">Kunrei</span><br><span class="uppercase bold">' . $kana[4] . '</span></div>'; ?>
 				</div>
 				<div class="translation-details">

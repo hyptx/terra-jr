@@ -24,8 +24,7 @@
 								<a class="flashcard-prev" href="#flashcard-swipe" role="button" data-slide="prev">
 							    	<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
 							    	<span class="sr-only">Previous</span>
-							  	</a>
-							  	<a role="button" onclick="toggleKana();"><span class="glyphicon glyphicon-retweet" aria-hidden="true" title="Switch Kana"></span></a>
+							  	</a>							  	
 							  	<a role="button" data-toggle="collapse" href="#flashcard-nav-container" aria-expanded="false" aria-controls="flashcard-nav-container"><span class="glyphicon glyphicon-th-list" aria-hidden="true" title="Kana List"></span></a>							  	
 							  	<a role="button" onclick="toggleRomanji();" class="tooggle-details-plus"><span class="glyphicon glyphicon-plus" aria-hidden="true" title="More Details"></span></a>
 							  	<a role="button" onclick="toggleRomanji();" class="tooggle-details-minus"><span class="glyphicon glyphicon-minus" aria-hidden="true" title="Less Details"></span></a>

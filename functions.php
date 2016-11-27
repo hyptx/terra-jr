@@ -22,7 +22,7 @@ ter_define_constants(array(
 	'TER_JQUERY_VERSION' => 		'1.9.1',
 	'TER_BOOTSTRAP_VERSION' => 		'3.3.7',
 	'TER_BS_IMG_RESPONSIVE' => 		'article img,.widget img',
-	'TER_GOOGLE_FONT' => 			'Open+Sans:400,400italic,600,600italic',	
+	'TER_GOOGLE_FONT' => 			'Source+Sans+Pro::400,400italic,700',//'Open+Sans:400,400italic,600,600italic',	
 	/* Layout */
 	'TER_LOGO' => 					$ter_dir . '/graphics/logo.png',
 	'TER_HEADER_HOME_LINK' => 		'title',

@@ -30,7 +30,7 @@ function ter_navbar_slide($location,$nav_class,$fallback){
 		<div class="container">		
 			<div id="<?php echo $location ?>-slide-collapse" class="slide-collapse" role="navigation">
 				<ul id="<?php echo $location ?>-nav-ul" class="nav navbar-nav slide-collapse-ul">
-				    <li class="hidden-xs"><a href="/" id="desktop-logo" class="inline-block theme-color"><h2 id="site-title" class="han" data-placement="bottom" title="Kuesuto.org">クエスト</h2></a></li>
+				    <li class="hidden-xs"><a href="/" id="desktop-logo" class="inline-block theme-color"><h2 id="site-title" class="nihongo" data-placement="bottom" title="Kuesuto.org">クエスト</h2></a></li>
 					<?php wp_nav_menu(array('fallback_cb' => 'ter_navbar_fallback','theme_location' => $location,'container' => false,'items_wrap' => '%3$s','walker' => new TerWalkerNavMenu())) ?>
 				</ul>
 			</div>			
@@ -38,7 +38,7 @@ function ter_navbar_slide($location,$nav_class,$fallback){
 				<button type="button" class="navbar-toggle absolute" onclick="terNavAnimate('#<?php echo $location ?>-slide-collapse','<?php echo $location ?>'); return false;"> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
 				<!-- For Image Button, comment out button above -->
 				<!--<a href="#" class="navbar-toggle-image absolute" onclick="terNavAnimate('#<?php echo $location ?>-slide-collapse','<?php echo $location ?>'); return false;"><img src="<?php echo TER_GRAPHICS ?>btn-menu.png" class="menu-button" alt="Open Menu"></a>-->
-				<a href="/" id="mobile-logo" class="inline-block theme-color" title="Kuesuto.org"><h2 id="site-title" class="han">クエスト</h2></a>            
+				<a href="/" id="mobile-logo" class="inline-block theme-color" title="Kuesuto.org"><h2 id="site-title" class="nihongo">クエスト</h2></a>            
 			</div>					
 		</div>
 	</nav>
