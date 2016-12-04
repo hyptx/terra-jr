@@ -6,15 +6,14 @@
 <header id="app-header" class="theme-bg-color">
 	<div class="container">
 		<div class="row">
-			<div class="col-sm-6"><h1 class="app-title h-balance-margin"><?php the_title() ?></h1></div>
-			<div class="col-sm-6"></div>
+			<div class="col-sm-12"><h1 class="app-title h-balance-margin"><?php the_title() ?></h1></div>
 		</div>
 	</div>
-	<?php $kana_generator->print_resize_buttons() ?>
+	<?php $kana_generator->print_resize_buttons(1,1) ?>
 </header><!-- .page-header -->
 <div id="main" class="container">
 	<div id="main-row" class="row">
-		<div id="primary" class="<?php echo TER_FULL_WIDTH_CLASS ?>">
+		<div id="primary" class="<?php echo TER_FULL_WIDTH_CLASS ?> no-pad">
 			<div id="content" role="main">								
 				<article id="post-<?php the_ID() ?>" <?php post_class() ?>>					
 					<div class="entry-content">

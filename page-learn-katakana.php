@@ -6,8 +6,7 @@
 <header id="app-header" class="theme-bg-color">
 	<div class="container">
 		<div class="row">
-			<div class="col-sm-6"><h1 class="app-title h-balance-margin"><?php the_title() ?></h1></div>
-			<div class="col-sm-6"></div>
+			<div class="col-sm-12"><h1 class="app-title h-balance-margin"><?php the_title() ?></h1></div>
 		</div>
 	</div>
 	<?php $kana_generator->print_nav_anchors() ?>

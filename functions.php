@@ -8,6 +8,7 @@ $ter_dir = get_bloginfo('stylesheet_directory');//Child theme is always 'stylesh
 /* Parent Theme Directories ~~> */
 ter_define_constants(array(
 	'TERRA_CHILD' => 		$ter_dir . '/',
+	'TERRA_AUDIO' => 		$ter_dir . '/audio/',
 	'TER_CHILD_CSS' => 		$ter_dir . '/css/',
 	'TER_CHILD_GRAPHICS' => $ter_dir . '/graphics/',
 	'TER_CHILD_INCLUDES' =>dirname(__FILE__) . '/includes/',
@@ -70,6 +71,7 @@ function ter_enqueue_scripts(){
 	if(TER_ACTIVATE_WAYPOINTS) wp_enqueue_script('ter_waypoints',TER_CDN_URL . 'waypoints/2.0.5/waypoints.min.js',array('jquery'));
 	wp_enqueue_script('ter_scripts',TER_JS . 'scripts.js',array('jquery'));
 	wp_enqueue_script('ter_child_scripts',TER_CHILD_JS . 'scripts.js',array('jquery'),'',1);
+	wp_enqueue_script('resp_voice','//code.responsivevoice.org/1.4/responsivevoice.js');
 }
 
 /* Enqueue Styles - Load theme css ~~> */
@@ -87,7 +89,7 @@ function ter_enqueue_styles(){
 	else $font_resize = 12;
 	$custom_css = "
 	#page-wrap #page .theme-color,a,a:hover,a:active,a:focus{color: {$theme_color};}
-	#page-wrap #page .theme-bg-color,#flashcard-nav li.active,.well{background: {$theme_color};}
+	#page-wrap #page .theme-bg-color,#flashcard-nav li.active,.well,.underline-indicator{background: {$theme_color};}
 	#page-wrap #page .theme-border-bottom{border-bottom: 1px solid {$theme_color};}
 	.navbar-default .navbar-toggle .icon-bar{background: {$theme_color};}
 	.navbar-default .navbar-toggle,.theme-border-color{border-color: {$theme_color};}

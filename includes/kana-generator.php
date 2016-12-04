@@ -64,6 +64,8 @@ class KanaGenerator{
 			['っ', 'ッ', 'gc', '', '', 		'Monographs(Gojūon)', '*', '*'],
 			['ゝ', 'ゝ', 'rdu', '', '', 		'Monographs(Gojūon)', '*', '*'],
 			['ゞ', 'ゞ', 'rdv', '', '', 		'Monographs(Gojūon)', '*', '*'],
+		];
+		$level_2 = [
 			['が', 'ガ', 'ga', '', '', 		'Diacritics(Gojūon/Handakuten)', 'g', 'a'], 
 			['ぎ', 'ギ', 'gi', '', '', 		'Diacritics(Gojūon/Handakuten)', 'g', 'i'], 
 			['ぐ', 'グ', 'gu', '', '', 		'Diacritics(Gojūon/Handakuten)', 'g', 'u'], 
@@ -89,7 +91,9 @@ class KanaGenerator{
 			['ぷ', 'プ', 'pu', '', '', 		'Diacritics(Gojūon/Handakuten)', 'p', 'u'], 
 			['ぺ', 'ペ', 'pe', '', '', 		'Diacritics(Gojūon/Handakuten)', 'p', 'e'], 
 			['ぽ', 'ポ', 'po', '', '', 		'Diacritics(Gojūon/Handakuten)', 'p', 'o'],
-			['ゔ', 'ウ', 'u', '', '', 		'Diacritics(Gojūon/Handakuten)', 'v', 'u'], 			
+			['ゔ', 'ウ', 'u', '', '', 		'Diacritics(Gojūon/Handakuten)', 'v', 'u'],
+		];
+		$level_3 = [		
 			['きゃ', 'キャ', 'kya', '', '', 		'Digraphs(Yōon)', 'k', 'ya'], 
 			['きゅ', 'キュ', 'kyu', '', '', 		'Digraphs(Yōon)', 'k', 'yu'], 
 			['きょ', 'キョ', 'kyo', '', '', 		'Digraphs(Yōon)', 'k', 'yo'], 
@@ -127,6 +131,11 @@ class KanaGenerator{
 			['ぴゅ', 'ピュ', 'pyu', '', '', 		'Digraphs/Diacritics', 'p', 'yu'], 
 			['ぴょ', 'ピョ', 'pyo', '', '', 		'Digraphs/Diacritics', 'p', 'yo'], 
 		];
+		if($_GET['level'] == 2) $this->_kana_array = array_merge($this->_kana_array,$level_2);
+		if($_GET['level'] == 3){
+			$this->_kana_array = array_merge($this->_kana_array,$level_2);
+			$this->_kana_array = array_merge($this->_kana_array,$level_3);
+		} 
 		$this->_character_count = count($this->_kana_array);
 		$this->prepare_flashcards();
 	}
@@ -137,6 +146,7 @@ class KanaGenerator{
 
 	public function print_flashcards(){
 		//[] = Hiragana[0],Katakana[1],Hepburn[2],Nihon-shiki[3],Kunrei-shiki[4],section[5],consonant[6],vowel[7]
+		$current_section = 'Monographs(Gojūon)';
 		$i = 0;
 		foreach($this->_kana_array as $kana){
 			if($i == 0) $active = ' active';
@@ -157,12 +167,11 @@ class KanaGenerator{
 			}
 			?>
 			<div class="item<?php echo $active ?> flashcard type-<?php echo $this->_kana_type ?>">
-
 				<div class="character-section" onclick="toggleKana();">
 					<span class="character nihongo character-hiragana theme-border-bottom"><?php echo $kana[0] ?></span>
 					<span class="character nihongo character-katakana theme-border-bottom"><?php echo $kana[1] ?></span>
 				</div>
-				<div class="translation-section" onclick="toggleKana();">
+				<div class="translation-section" onclick="speakCharacter('<?php echo $kana[0] ?>');">
 					<?php if($kana[3]) echo '<div class="romanji-alt nihon-alt"><span class="opacity-light">Nihon</span><br><span class="uppercase bold">' .  $kana[3] . '</span></div>';	?>
 					<span class="translation uppercase"><?php echo $translation ?></span>
 					<?php if($kana[4]) echo '<div class="romanji-alt kunrei-alt"><span class="opacity-light">Kunrei</span><br><span class="uppercase bold">' . $kana[4] . '</span></div>'; ?>
@@ -186,8 +195,8 @@ class KanaGenerator{
 					</div>
 				</div>
 			</div>
-			<?php
-			$i++;
+			<?php 
+			$i++; 
 		}
 	}
 
@@ -230,10 +239,22 @@ class KanaGenerator{
 
 	public function print_characters(){
 		//[] = Hiragana[0],Katakana[1],Hepburn[2],Nihon-shiki[3],Kunrei-shiki[4],section[5],consonant[6],vowel[7]
+		global $current_section;
+		$current_section = 'Monographs(Gojūon)';
 		?>
-		<div id="character-list" class="character-list-<?php echo $this->_kana_type ?> text-center font-resize responsive-neg-margin">
+		<div id="character-list" class="character-list-<?php echo $this->_kana_type ?> text-center font-resize responsive-neg-margin<?php if($_GET['spacers'] != 1) echo ' hide-spacers' ?>">
 			<?php $i = 0; foreach($this->_kana_array as $kana):
-			
+			$add_blank = '';
+			$add_blank_line = '';
+			if($current_section != $kana[5]){
+				$add_blank = '<hr class="spacer">';
+				$current_section = $kana[5];
+			}
+			else $add_blank = '';
+			if($kana[2] == 'n'){
+				$add_blank = '<hr class="spacer">';
+				$add_blank_line = '<hr class="spacer">';
+			}			
 			if($this->_kana_type == 'hiragana'){
 				$character = $kana[0];
 				$character_alt = $kana[1];
@@ -243,23 +264,32 @@ class KanaGenerator{
 				$character_alt = $kana[0];
 			} 
 			?>		
-			<div id="char-<?php echo $i ?>" class="character-tile theme-bg-color theme-border-color rounded-8" onclick="toggleCharTile(this);">
+			<?php echo $add_blank ?>
+			<div id="char-<?php echo $i ?>" class="character-tile theme-bg-color theme-border-color rounded-8">
 				<div class="character-bg-overlay rounded-12 bg-overlay">
 					<span class="tile-type hiragana-label">H</span>
 					<span class="tile-type katakana-label">K</span>
-					<div class="character nihongo theme-border-bottom"><?php echo $character ?></div>
-					<div class="character character-alt nihongo theme-border-bottom"><?php echo $character_alt ?></div>
-					<div class="translation"><?php echo $kana[2] ?></div>
+					<div class="character nihongo theme-border-bottom" onclick="toggleTileKana(this);"><?php echo $character ?></div>
+					<div class="character character-alt nihongo theme-border-bottom" onclick="toggleTileKana(this);"><?php echo $character_alt ?></div>
+					<div class="translation" onclick="speakCharacter('<?php echo $kana[0] ?>');"><?php echo $kana[2] ?></div>
 				</div>
 			</div>
+			<?php 
+			if($kana[2] == 'ya') $this->print_blank_char();
+			if($kana[2] == 'yu') $this->print_blank_char();
+			if($kana[0] == 'ゐ') $this->print_blank_char();
+			?>
+			<?php echo $add_blank_line ?>
 			<?php $i++; endforeach ?>
 		</div>
 		<script type="text/javascript">
-			jQuery(function(){
-			  	jQuery(".character-tile").bind("taphold", tapholdHandler);			 
-			  function tapholdHandler(event){ window.location.href = '/learn-hiragana/#' + jQuery(this).attr('id'); 
-				}
-			});
+		// jQuery.event.special.tap.emitTapOnTaphold = false;
+		// jQuery('.character-tile').on('tap',function(){
+		// 	var character = jQuery(this).attr('rel');
+		// 	if(character) responsiveVoice.speak(character,'Japanese Female',{rate: .8,pitch: 1.1});
+		// }).on('taphold',function(){
+  		//   jQuery(this).toggleClass('tile-alt');
+		// });
 		</script>
 		<?php
 	}
@@ -280,8 +310,8 @@ class KanaGenerator{
 			} 
 			?>		
 			<div id="char-<?php echo $i ?>" class="character-with-detials">
-				<div class="character nihongo theme-border-bottom inline-block"><?php echo $character ?></div>
-				<div class="translation-section">
+				<div class="character nihongo theme-border-bottom inline-block" onclick="speakCharacter('<?php echo $kana[0] ?>');"><?php echo $character ?></div>
+				<div class="translation-section" onclick="speakCharacter('<?php echo $kana[0] ?>');">
 					<?php if($kana[3]) echo '<div class="romanji-alt nihon-alt"><span class="opacity-light">Nihon</span><br><span class="uppercase bold">' .  $kana[3] . '</span></div>';	?>
 					<span class="translation uppercase"><?php echo $kana[2] ?></span>
 					<?php if($kana[4]) echo '<div class="romanji-alt kunrei-alt"><span class="opacity-light">Kunrei</span><br><span class="uppercase bold">' . $kana[4] . '</span></div>'; ?>
@@ -310,35 +340,80 @@ class KanaGenerator{
 		<?php
 	}
 
-	public function print_resize_buttons(){?>
-		<div class="resize-buttons theme-bg-color text-center bold">
+	public function print_resize_buttons($show_resize = false,$show_spacers = false){?>
+		<div class="resize-buttons theme-bg-color text-center bold<?php if($_GET['random']) echo ' random' ?>">
 			<div class="bg-overlay-7">
 				<div class="container">
 					<div class="row">
 						<div class="col-sm-12">
-							<span class="glyphicon glyphicon-text-height" aria-hidden="true"></span>&nbsp;&nbsp;
-							<a href="?resize=2" class="<?php if($_GET['resize'] == 2) echo 'active' ?>">2</a>
-							<a href="?resize=4" class="<?php if($_GET['resize'] == 4) echo 'active' ?>">4</a>
-							<a href="?resize=6" class="<?php if($_GET['resize'] == 6) echo 'active' ?>">6</a>
-							<a href="?resize=8" class="<?php if($_GET['resize'] == 8) echo 'active' ?>">8</a>
-							<a href="?resize=10" class="<?php if($_GET['resize'] == 10) echo 'active' ?>">10</a>
-							<a href="?resize=12" class="<?php if($_GET['resize'] == 12 || !$_GET['resize']) echo 'active' ?>">12</a>
-							<a href="?resize=14" class="<?php if($_GET['resize'] == 14) echo 'active' ?>">14</a>
-							<a href="?resize=16" class="<?php if($_GET['resize'] == 16) echo 'active' ?>">16</a>
-							<a href="?resize=20" class="<?php if($_GET['resize'] == 20) echo 'active' ?>">20</a>
-							<a href="?resize=24" class="<?php if($_GET['resize'] == 24) echo 'active' ?>">24</a>
-							<a href="?resize=36" class="<?php if($_GET['resize'] == 36) echo 'active' ?>">36</a>
-							<a href="?resize=48" class="<?php if($_GET['resize'] == 48) echo 'active' ?>">48</a>
-							<a href="?resize=64" class="<?php if($_GET['resize'] == 64) echo 'active' ?>">64</a>
+							<a role="button" href="<?php $this->print_level_qs('1'); ?>" class="<?php if(!$_GET['level'] || $_GET['level'] == 1)echo  'active' ?>" title="Monographs Only">Easy</a>		
+						  	<a role="button" href="<?php $this->print_level_qs('2'); ?>" class="<?php if($_GET['level'] == 2)echo  'active' ?>" title="Monographs and Diacritics">Med</a> 	
+						  	<a role="button" href="<?php $this->print_level_qs('3'); ?>" class="<?php if($_GET['level'] == 3)echo  'active' ?>" title="Monographs, Diacritics, Diagraphs">Hard</a>
+						  	<?php if($_GET['random'] == 1): ?>
+						  	<a role="button" href="<?php $this->print_random_qs('0'); ?>" class="toggle-shuffle" title="Turn Shuffle Off">Un-Shuffle</a>
+						  	<?php else: ?>
+						  	<a role="button" href="<?php $this->print_random_qs('1'); ?>" class="toggle-shuffle opacity-light" title="Turn Shuffle On">Shuffle</a>
+						  	<?php endif ?>
+						  	<?php if($show_spacers): ?>
+						  	<?php if($_GET['spacers'] == 1): ?>
+						  	<a role="button" href="<?php $this->print_spacer_qs('0'); ?>" class="toggle-spacers" title="Hide Spacers">Hide Spacers</a>
+						  	<?php else: ?>
+						  	<a role="button" href="<?php $this->print_spacer_qs('1'); ?>" class="toggle-spacers opacity-light" title="Show Spacers">Show Spacers</a>
+						  	<?php endif ?>
+						  	<?php endif ?>
 						</div>
 					</div>
+					<?php if($show_resize): ?>
+					<div class="row">
+						<div class="col-sm-12" style="padding-top: 3px">
+							<a href="<?php $this->print_resize_qs('4') ?>" class="<?php if($_GET['resize'] == 4) echo 'active' ?>">4<span id="r-4" class="underline-indicator"></span></a>
+							<a href="<?php $this->print_resize_qs('5') ?>" class="<?php if($_GET['resize'] == 5) echo 'active' ?>">5<span id="r-5" class="underline-indicator"></span></a>
+							<a href="<?php $this->print_resize_qs('6') ?>" class="<?php if($_GET['resize'] == 6) echo 'active' ?>">6<span id="r-6" class="underline-indicator"></span></a>
+							<a href="<?php $this->print_resize_qs('8') ?>" class="<?php if($_GET['resize'] == 8) echo 'active' ?>">8<span id="r-8" class="underline-indicator"></span></a>
+							<a href="<?php $this->print_resize_qs('10') ?>" class="<?php if($_GET['resize'] == 10) echo 'active' ?>">10<span id="r-10" class="underline-indicator"></span></a>
+							<a href="<?php $this->print_resize_qs('12') ?>" class="<?php if($_GET['resize'] == 12 || !$_GET['resize']) echo 'active' ?>">12<span id="r-12" class="underline-indicator"></span></a>
+							<a href="<?php $this->print_resize_qs('14') ?>" class="<?php if($_GET['resize'] == 14) echo 'active' ?>">14</a>
+							<a href="<?php $this->print_resize_qs('16') ?>" class="<?php if($_GET['resize'] == 16) echo 'active' ?>">16<span id="r-16" class="underline-indicator"></span></a>
+							<a href="<?php $this->print_resize_qs('20') ?>" class="<?php if($_GET['resize'] == 20) echo 'active' ?>">20</a>
+							<a href="<?php $this->print_resize_qs('24') ?>" class="<?php if($_GET['resize'] == 24) echo 'active' ?>">24</a>
+							<a href="<?php $this->print_resize_qs('36') ?>" class="<?php if($_GET['resize'] == 36) echo 'active' ?>">36</a>
+							<a href="<?php $this->print_resize_qs('48') ?>" class="<?php if($_GET['resize'] == 48) echo 'active' ?>">48</a>
+							<a href="<?php $this->print_resize_qs('64') ?>" class="<?php if($_GET['resize'] == 64) echo 'active' ?>">64</a>
+						</div>
+					</div>
+					<?php endif ?>
 				</div>
 			</div>
 		</div>
 		<?php
 	}
 
+	private function print_blank_char(){
+		echo '<div class="character-tile theme-bg-color theme-border-color rounded-8 blank-char">
+				<div class="character-bg-overlay rounded-12 bg-overlay">
+					<div class="character nihongo theme-border-bottom">&nbsp;</div>
+					<div class="character character-alt nihongo theme-border-bottom">&nbsp;</div>
+					<div class="translation">&nbsp;</div>
+				</div>
+			</div>';
+	}
 
+	private function print_resize_qs($switch){
+		echo '?level=' . $_GET['level'] . '&amp;resize=' . $switch . '&amp;random=' . $_GET['random'] . '&amp;spacers=' . $_GET['spacers'];
+	}
+
+	private function print_level_qs($switch){
+		echo '?level=' . $switch . '&amp;resize=' . $_GET['resize'] . '&amp;random=' . $_GET['random'] . '&amp;spacers=' . $_GET['spacers'];
+	}
+
+	private function print_random_qs($switch){
+		echo '?level=' . $_GET['level'] . '&amp;resize=' . $_GET['resize'] . '&amp;random=' . $switch . '&amp;spacers=' . $_GET['spacers'];
+	}
+
+	private function print_spacer_qs($switch){
+		echo '?level=' . $_GET['level'] . '&amp;resize=' . $_GET['resize'] . '&amp;random=' . $_GET['random'] . '&amp;spacers=' . $switch;
+	}
+	
 	private function shuffle_array(){ 
   		$keys = array_keys($this->_kana_array); 
   		shuffle($keys); 

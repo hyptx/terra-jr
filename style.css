@@ -21,11 +21,12 @@ body,#colophon{background: #444}
 #page{background: #f9f9f9}
 .nihongo{font-family: "heisei-kaku-gothic-stdn",sans-serif; font-weight: 500}
 .uppercase{text-transform: uppercase;}
-#primary{padding-bottom: 0}
+#primary.no-pad{padding-bottom: 0}
 a:hover,a:active,a:focus{opacity: .86}
 .divider{height:1px; margin:10px;}
 .h-balance-margin{margin-top:10px;}
 .well{padding: 6px; color:#000; border:0; margin-bottom: 0}
+#page .entry-content .well a{color:#fff;}
 .no-margin-template article{margin-bottom:0}
 .opacity-light{opacity: .8}
 .complex-trans{font-size:16px; line-height: 1em;}
@@ -33,6 +34,14 @@ a:hover,a:active,a:focus{opacity: .86}
 .bg-overlay-7{background: rgba(255,255,255,.7)}
 #primary{padding-top: 15px}
 article{margin-bottom: 15px}
+hr{border-color:#ccc;}
+.back-to-top{bottom: 38px; right: 2px;}
+textarea{padding:6px; border:1px solid #ccc;}
+#speakme-examples .nihongo{cursor: pointer;}
+.table-striped > tbody > tr:nth-child(odd) > td,
+.table-striped > tbody > tr:nth-child(odd) > th {
+  background-color: #ededed;
+}
 
 /* Header ~~~~> */
 .app-title {color:#fff; font-size: 24px; opacity: .6}
@@ -47,15 +56,15 @@ article{margin-bottom: 15px}
 .carousel-inner > .item{-webkit-transition: .25s ease-in-out left; -o-transition: .25s ease-in-out left; transition: .25s ease-in-out left;}
 .translation-section{padding-top:16px;}
 #flashcard-control-bar{padding:16px 0 10px;}
-#flashcard-control-bar a{font-size: 32px; margin:0 8px}
+#flashcard-control-bar a{font-size: 36px; margin:0 5px}
 #flashcard-control-bar .flashcard-prev{float: left; margin:0;}
 #flashcard-control-bar .flashcard-next{float: right; margin:0;}
 .character-section{padding: 16px 0;cursor: pointer;}
 .character-section .character{display: inline-block;}
-.translation-section{padding:16px 0; cursor: pointer;}
+.translation-section{padding:18px 0; cursor: pointer;}
 .translation-section *{vertical-align: middle;}
 #flashcard-nav{padding: 0; bottom:auto; left: auto; margin: 0; position: static; text-align: center; width: auto;}
-#flashcard-nav li{list-style-type: none; display: inline-block; cursor: pointer; font-size: 22px; padding: 3px; width: 55px; background-color: none; border: 0; height: auto; margin: 0; text-indent: 0; border-radius:16px; -webkit-border-radius:16px;}
+#flashcard-nav li{list-style-type: none; display: inline-block; cursor: pointer; font-size: 22px; padding: 3px; width: 55px; background-color: none; border: 0; height:31px; margin: 0; text-indent: 0; border-radius:16px; -webkit-border-radius:16px;}
 #page #flashcard-nav li.active{color:#fff; background: #444}
 .kana-indicator{display: inline-block;}
 .type-hiragana .character-hiragana,.type-hiragana .swap-kana .character-katakana{display: inline-block; opacity: 1}
@@ -73,14 +82,19 @@ article{margin-bottom: 15px}
 .romanji-alt .opacity-light{font-size: 13px}
 #flashcard-control-bar .tooggle-details-minus,.show-details #flashcard-control-bar .tooggle-details-plus{display: none;}
 .show-details #flashcard-control-bar .tooggle-details-minus{display: inline-block;}
+.glyph-inner{color: #fff; font-family: 'open sans'; font-size: 10px; left: 12px; position: absolute; top: 14px;}
+.playing .glyphicon-play,.glyphicon-pause,.play-x2,.playing.playing-x2 .play-x2{display: none}
+.playing .play-x2{display: inline-block;}
+.playing.playing-x2 .glyphicon-pause{display: inline-block;}
 
 /* Character List ~~~~> */   
-.character-tile{position: relative; display:inline-block; margin: .5em; border-width: 2px; border-style: solid; cursor: pointer;}
+.character-tile{position: relative; display:inline-block; margin: .5em; border-width: 2px; border-style: solid;}
 .character-tile *,.character-section *{-webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none;}
+.character-tile .character,.character-tile .translation{cursor: pointer;}
 .character-bg-overlay{padding: .7em;}
-.character{font-size: 9em; padding:.3em .1em .1em .1em; line-height: 1em;/* width:1em;*/}
+.character{font-size: 9em; padding:.3em .1em .1em .1em; line-height: 1em; min-width:1.2em;}
 .translation{font-size: 3em; padding:0.3em .1em .1em; line-height: 1em; text-transform: uppercase;}
-.resize-buttons a{display: inline-block; padding: 6px 8px; margin-right: -4px}
+.resize-buttons a{display: inline-block; font-size:18px; padding: 4px 8px 5px; margin-right:2px;}
 .resize-buttons a:hover,.resize-buttons a.active{background: #444; color:#fff;}
 .tile-alt .bg-overlay{background: rgba(255,255,255,.7)}
 .character-alt{display: none}
@@ -95,8 +109,16 @@ article{margin-bottom: 15px}
 .character-list-katakana .tile-alt .tile-type.katakana-label{display: none}
 .character-list-katakana .tile-alt .tile-type.hiragana-label{display: inline-block;}
 #character-list .romanji-alt{display: inline-block;}
+#character-list .character{cursor: pointer;}
 .anchor-indicators .col-sm-12{padding:16px 0 }
 .anchor-indicators a{color:#000;}
+.resize-buttons a{position: relative;}
+.underline-indicator{position: absolute; bottom: -4px; display: none; height: 5px; left: 0; right: 0; width: 100%;}
+#page .random .underline-indicator{display: none;}
+.blank-char{opacity: .4; cursor: default;}
+.blank-char .character-bg-overlay{opacity: .3}
+.spacer-div{margin:12px 0;}
+.hide-spacers .spacer-div,.hide-spacers .blank-char,.hide-spacers hr.spacer{display:none;}
 
 /* Sidebar ~~~~> */
 /* Footer ~~~~> */
@@ -176,11 +198,11 @@ article{margin-bottom: 15px}
 }
 
 @media (min-width: 992px){
-
+	
 }
 
 @media (min-width: 1200px){
-
+	#r-16{display: inline-block;}
 }
 /* <~~~~~~~~< END Min Width Media Queries */
 
@@ -197,6 +219,28 @@ article{margin-bottom: 15px}
 	.well{border-radius:0; -webkit-border-radius:0;}
 }
 
-@media (max-width: 479px){
+/* Special >~~~~~~~~> */
 
+@media (min-width: 992px) and (max-width: 1199px){
+	#r-12{display: inline-block;}
+}
+
+@media (min-width: 640px) and (max-width: 991px){
+	#r-10{display: inline-block;}
+}
+
+@media (min-width: 481px) and (max-width: 640px){
+	#r-8{display: inline-block;}
+}
+
+@media (min-width: 361px) and (max-width: 480px){
+	#r-6{display: inline-block;}
+}
+
+@media (min-width: 321px) and (max-width: 360px){
+	#r-5{display: inline-block;}
+}
+
+@media (max-width: 320px){
+	#r-4{display: inline-block;}
 }

@@ -22,9 +22,10 @@
 		<div id="primary" class="<?php echo TER_PRIMARY_CLASS ?>">
 			<div id="content" role="main">
 				<?php
+				/* 
 				//Uncomment for Alphabetical nav, add 'alphabetical' argument to ter_nav_single() in single.php
-				global $query_string; query_posts($query_string . '&orderby=post_date&order=ASC');
-				
+				global $query_string; query_posts($query_string . '&orderby=post_title&order=ASC');
+				*/
 				?>
 				<?php if (have_posts()): ?>
 				<?php while(have_posts()) : the_post() ?>
