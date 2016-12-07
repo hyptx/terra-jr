@@ -57,9 +57,9 @@ class KanaGenerator{
 			['れ', 'レ', 're', '', '', 		'Monographs(Gojūon)', 'r', 'e'], 
 			['ろ', 'ロ', 'ro', '', '', 		'Monographs(Gojūon)', 'r', 'o'], 
 			['わ', 'ワ', 'wa', '', '', 		'Monographs(Gojūon)', 'w', 'a'], 
-			['ゐ', 'ヰ', 'i', 'wi', 'i',		'Monographs(Gojūon)', 'w', 'i'],
-			['ゑ', 'ヱ', 'e', 'we', 'e',		'Monographs(Gojūon)', 'w', 'e'],
-			['を', 'ヲ', 'o', 'wo', 'o', 		'Monographs(Gojūon)', 'w', 'o'], 
+			['ゐ', 'ヰ', 'wi', 'wi', 'i',		'Monographs(Gojūon)', 'w', 'i'],
+			['ゑ', 'ヱ', 'we', 'we', 'e',		'Monographs(Gojūon)', 'w', 'e'],
+			['を', 'ヲ', 'wo', 'wo', 'o', 		'Monographs(Gojūon)', 'w', 'o'], 
 			['ん', 'ン', 'n', 'n-n', 'n-n', 	'Monographs(Gojūon)', '*', '*'], 
 			['っ', 'ッ', 'gc', '', '', 		'Monographs(Gojūon)', '*', '*'],
 			['ゝ', 'ゝ', 'rdu', '', '', 		'Monographs(Gojūon)', '*', '*'],
@@ -340,19 +340,54 @@ class KanaGenerator{
 		<?php
 	}
 
-	public function print_resize_buttons($show_resize = false,$show_spacers = false){?>
+	public function print_practice_sheet(){
+		//[] = Hiragana[0],Katakana[1],Hepburn[2],Nihon-shiki[3],Kunrei-shiki[4],section[5],consonant[6],vowel[7]
+		global $current_section;
+		$current_section = 'Monographs(Gojūon)';
+		?>
+		<div id="practice-sheet" class="practice-sheet-<?php echo $this->_kana_type ?> text-center <?php if($_GET['spacers'] != 1) echo ' hide-spacers' ?>" title="Select Print from your Browser">
+			<?php $i = 0; foreach($this->_kana_array as $kana):
+			$add_blank = '';
+			$add_blank_line = '';
+			if($kana[2] == 'gi'){
+				$add_blank = '<div class="clear">&nbsp;</div>';
+			}	
+			else $add_blank = '';		
+			if($this->_kana_type == 'hiragana') $character = $kana[0];
+			else $character = $kana[1];
+			?>		
+			<?php echo $add_blank ?>
+			<div id="char-<?php echo $i ?>" class="practice-tile">
+				<div class="practice-translation"><?php echo $kana[2] ?></div>		
+				<div class="practice-character nihongo practice-inner"><?php echo $character ?></div>
+				<div class="practice practice-inner"></div>
+			</div>
+			<?php 
+			if($kana[2] == 'ya') $this->print_blank_char();
+			if($kana[2] == 'yu') $this->print_blank_char();
+			if($kana[0] == 'ゐ') $this->print_blank_char();
+			?>
+			<?php echo $add_blank_line ?>
+			<?php $i++; endforeach ?>
+		</div>
+		<?php
+	}
+
+	public function print_resize_buttons($show_resize = false,$show_spacers = false,$show_shuffle = false){?>
 		<div class="resize-buttons theme-bg-color text-center bold<?php if($_GET['random']) echo ' random' ?>">
 			<div class="bg-overlay-7">
 				<div class="container">
 					<div class="row">
 						<div class="col-sm-12">
-							<a role="button" href="<?php $this->print_level_qs('1'); ?>" class="<?php if(!$_GET['level'] || $_GET['level'] == 1)echo  'active' ?>" title="Monographs Only">Easy</a>		
-						  	<a role="button" href="<?php $this->print_level_qs('2'); ?>" class="<?php if($_GET['level'] == 2)echo  'active' ?>" title="Monographs and Diacritics">Med</a> 	
-						  	<a role="button" href="<?php $this->print_level_qs('3'); ?>" class="<?php if($_GET['level'] == 3)echo  'active' ?>" title="Monographs, Diacritics, Diagraphs">Hard</a>
+							<a role="button" href="<?php $this->print_level_qs('1'); ?>" class="<?php if(!$_GET['level'] || $_GET['level'] == 1) echo  'active' ?>" title="Monographs Only">Easy</a>		
+						  	<a role="button" href="<?php $this->print_level_qs('2'); ?>" class="<?php if($_GET['level'] == 2) echo  'active' ?>" title="Monographs and Diacritics">Med</a> 	
+						  	<a role="button" href="<?php $this->print_level_qs('3'); ?>" class="<?php if($_GET['level'] == 3) echo  'active' ?> btn-hard" title="Monographs, Diacritics, Diagraphs">Hard</a>
+						  	<?php if($show_shuffle): ?>
 						  	<?php if($_GET['random'] == 1): ?>
 						  	<a role="button" href="<?php $this->print_random_qs('0'); ?>" class="toggle-shuffle" title="Turn Shuffle Off">Un-Shuffle</a>
 						  	<?php else: ?>
 						  	<a role="button" href="<?php $this->print_random_qs('1'); ?>" class="toggle-shuffle opacity-light" title="Turn Shuffle On">Shuffle</a>
+						  	<?php endif ?>
 						  	<?php endif ?>
 						  	<?php if($show_spacers): ?>
 						  	<?php if($_GET['spacers'] == 1): ?>
@@ -388,13 +423,19 @@ class KanaGenerator{
 		<?php
 	}
 
-	private function print_blank_char(){
-		echo '<div class="character-tile theme-bg-color theme-border-color rounded-8 blank-char">
+	private function print_blank_char($practice = false){
+		if($practice) echo '
+			<div class="character-tile theme-bg-color theme-border-color rounded-8 blank-char">
 				<div class="character-bg-overlay rounded-12 bg-overlay">
 					<div class="character nihongo theme-border-bottom">&nbsp;</div>
 					<div class="character character-alt nihongo theme-border-bottom">&nbsp;</div>
 					<div class="translation">&nbsp;</div>
 				</div>
+			</div>';
+		else echo '
+			<div class="practice-tile practice-blank">				
+				<div class="practice-character nihongo practice-inner">&nbsp;</div>
+				<div class="practice practice-inner"></div>			
 			</div>';
 	}
 

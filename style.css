@@ -120,6 +120,15 @@ textarea{padding:6px; border:1px solid #ccc;}
 .spacer-div{margin:12px 0;}
 .hide-spacers .spacer-div,.hide-spacers .blank-char,.hide-spacers hr.spacer{display:none;}
 
+/* Practice ~~~~> */
+#practice-sheet{margin:0 auto; width:590px;}
+.practice-tile{position:relative; float:left; border:1px solid #DEDEDE; font-size: 2em;  padding-top: 6px; margin-right:-1px; margin-top: -1px}
+.practice-inner{height: 43px; width: 117px}
+.practice-character{border-bottom: 1px dotted #DEDEDE}
+.practice-translation{color:#888; font-size: 12px; position: absolute; top:0; right:4px; text-transform: uppercase;}
+.practice-blank .practice-character{border-bottom:0}
+.page-id-102 .btn-hard,.page-id-99 .btn-hard{display: none}
+
 /* Sidebar ~~~~> */
 /* Footer ~~~~> */
 #colophon{color:#929292;}
@@ -243,4 +252,11 @@ textarea{padding:6px; border:1px solid #ccc;}
 
 @media (max-width: 320px){
 	#r-4{display: inline-block;}
+}
+
+/* Print >~~~~~~~~> */
+@media print {
+   #colophon,#color-bar,#app-header,#header-nav{display: none;}
+   #page{background: #fff}
+   #primary{padding:0;}
 }

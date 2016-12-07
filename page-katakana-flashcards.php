@@ -10,7 +10,7 @@
 		</div>
 	</div>
 </header><!-- .page-header -->
-<?php $kana_generator->print_resize_buttons() ?>
+<?php $kana_generator->print_resize_buttons(0,0,1) ?>
 <div id="main" class="container no-margin-template">
 	<div id="main-row" class="row">
 		<div id="primary" class="<?php echo TER_FULL_WIDTH_CLASS ?> no-pad">

@@ -9,18 +9,18 @@
 			<div class="col-sm-12"><h1 class="app-title h-balance-margin"><?php the_title() ?></h1></div>
 		</div>
 	</div>
-	<?php $kana_generator->print_resize_buttons(1,1,1) ?>
+	<?php $kana_generator->print_resize_buttons(false,false) ?>
 </header><!-- .page-header -->
 <div id="main" class="container">
 	<div id="main-row" class="row">
-		<div id="primary" class="<?php echo TER_FULL_WIDTH_CLASS ?> no-pad">
+		<div id="primary" class="<?php echo TER_FULL_WIDTH_CLASS ?> no-pad practice-page">
 			<div id="content" role="main">								
-				<article id="post-<?php the_ID() ?>" <?php post_class() ?>>					
+				<div id="post-<?php the_ID() ?>" <?php post_class() ?>>					
 					<div class="entry-content">
 						<?php the_content() ?>						
-						<?php $kana_generator->print_characters() ?>
+						<?php $kana_generator->print_practice_sheet() ?>
 					</div><!-- .entry-content -->
-				</article><!-- #post-<?php the_ID() ?> -->
+				</div><!-- #post-<?php the_ID() ?> -->
 			</div><!-- /#content -->
 		</div><!-- /#primary -->
 	</div><!-- /#main-row -->

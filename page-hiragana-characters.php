@@ -9,7 +9,7 @@
 			<div class="col-sm-12"><h1 class="app-title h-balance-margin"><?php the_title() ?></h1></div>
 		</div>
 	</div>
-	<?php $kana_generator->print_resize_buttons(1,1) ?>
+	<?php $kana_generator->print_resize_buttons(1,1,1) ?>
 </header><!-- .page-header -->
 <div id="main" class="container">
 	<div id="main-row" class="row">
