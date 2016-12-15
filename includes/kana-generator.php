@@ -91,7 +91,7 @@ class KanaGenerator{
 			['ぷ', 'プ', 'pu', '', '', 		'Diacritics(Gojūon/Handakuten)', 'p', 'u'], 
 			['ぺ', 'ペ', 'pe', '', '', 		'Diacritics(Gojūon/Handakuten)', 'p', 'e'], 
 			['ぽ', 'ポ', 'po', '', '', 		'Diacritics(Gojūon/Handakuten)', 'p', 'o'],
-			['ゔ', 'ウ', 'u', '', '', 		'Diacritics(Gojūon/Handakuten)', 'v', 'u'],
+			['ゔ', 'ウ', 'vu', '', '', 		'Diacritics(Gojūon/Handakuten)', 'v', 'u'],
 		];
 		$level_3 = [		
 			['きゃ', 'キャ', 'kya', '', '', 		'Digraphs(Yōon)', 'k', 'ya'], 
@@ -200,6 +200,79 @@ class KanaGenerator{
 		}
 	}
 
+	public function print_quiz(){
+		//[] = Hiragana[0],Katakana[1],Hepburn[2],Nihon-shiki[3],Kunrei-shiki[4],section[5],consonant[6],vowel[7]
+		$current_section = 'Monographs(Gojūon)';
+		$i = 0;
+		//Remove unwanted
+		foreach($this->_kana_array as $key => $value){
+			switch($value[2]){
+				case 'gc': unset($this->_kana_array[$key]); break;
+				case 'rdu': unset($this->_kana_array[$key]); break;
+				case 'rdv': unset($this->_kana_array[$key]); break;
+				default: break;
+			}
+		}
+		$this->_character_count = count($this->_kana_array);
+		echo '<div id="score" class="text-center"><span id="score-correct">0</span><span id="score-incorrect">0</span></div><script type="text/javascript">quizItems = ' . $this->_character_count . ';</script><div id="results" class="rounded-10"></div>';
+		foreach($this->_kana_array as $kana){
+			if($i == 0) $active = ' active';
+			else $active = '';
+			switch($kana[2]) {
+				case 'gc': $translation = '<span class="complex-trans">Geminate Consonant</span>'; break;
+				case 'rduv': $translation = '<span class="complex-trans">Reduplicates/Unvoices</span>'; break;
+				case 'rdv': $translation = '<span class="complex-trans">Reduplicates/Voices</span>'; break;
+				default: $translation = $kana[2]; break;
+			}
+			if($this->_kana_type == 'hiragana'){
+				$hiragana_indicator = 'main-indicator';
+				$katakana_indicator = 'reverse-kana-indicator';
+			}
+			else{
+				$hiragana_indicator = 'reverse-kana-indicator';
+				$katakana_indicator = 'main-indicator';
+			}
+			?>
+			<div class="item<?php echo $active ?> flashcard type-<?php echo $this->_kana_type ?>">
+				<div class="character-section" onclick="toggleKana();">
+					<span class="character nihongo character-hiragana"><?php echo $kana[0] ?></span>
+					<span class="character nihongo character-katakana"><?php echo $kana[1] ?></span>
+				</div>
+				<div class="info-section">
+					<div class="row">
+						<div class="col-xs-6 text-left">
+							<a href="https://en.wikipedia.org/wiki/<?php echo $kana[0] ?>" target="_blank" title="Kana Info" class="kana-indicator <?php echo $hiragana_indicator ?>"><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> Hiragana</a><a href="https://en.wikipedia.org/wiki/<?php echo $kana[1] ?>" target="_blank" title="Kana Info" class="kana-indicator <?php echo $katakana_indicator ?>"><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> Katakana</a>
+						</div>
+						<div class="col-xs-6 text-right">
+							<?php echo ($i + 1) . ' of ' . $this->_character_count ?>
+						</div>
+					</div>
+				</div>
+				<div id="quiz-answer-bar-container"><div id="quiz-answer-bar" class="text-center theme-bg-color inline-block"><?php $this->print_answer_tiles($kana[2]) ?></div>
+			</div></div>
+			<?php 
+			$i++; 
+		}
+	}
+
+	public function print_answer_tiles($correct_answer){
+		$random_answers = array_rand($this->_kana_array,5); 
+		$i = 1;
+		foreach($random_answers as $anwser){
+			if($this->_kana_array[$anwser][2] == $correct_answer) continue;
+			if($i >= 5) continue;
+			$answers_array[] = $this->_kana_array[$anwser][2];
+			$i++;
+		} 
+		$answers_array[] = $correct_answer;
+		shuffle($answers_array);
+		foreach($answers_array as $answer){
+			if($answer == $correct_answer) $right_answer_class = ' correct'; 
+			else $right_answer_class = '';
+			echo '<a class="quiz-answer bg-overlay-7' . $right_answer_class . '" onclick="checkQuizAnswer(this);">' . $answer . '</a>';
+		}
+	}
+
 	public function print_nav(){
 		$i = 0;
 		echo '<ul id="flashcard-nav" class="carousel-indicators">';
@@ -277,6 +350,10 @@ class KanaGenerator{
 			<?php 
 			if($kana[2] == 'ya') $this->print_blank_char();
 			if($kana[2] == 'yu') $this->print_blank_char();
+			if($kana[2] == 'po' || $kana[2] == 'vu'){
+				$this->print_blank_char();
+				$this->print_blank_char();
+			} 
 			if($kana[0] == 'ゐ') $this->print_blank_char();
 			?>
 			<?php echo $add_blank_line ?>
@@ -349,9 +426,9 @@ class KanaGenerator{
 			<?php $i = 0; foreach($this->_kana_array as $kana):
 			$add_blank = '';
 			$add_blank_line = '';
-			if($kana[2] == 'gi'){
+			if($kana[2] == 'ga'){
 				$add_blank = '<div class="clear">&nbsp;</div>';
-			}	
+			}
 			else $add_blank = '';		
 			if($this->_kana_type == 'hiragana') $character = $kana[0];
 			else $character = $kana[1];
@@ -363,9 +440,13 @@ class KanaGenerator{
 				<div class="practice practice-inner"></div>
 			</div>
 			<?php 
-			if($kana[2] == 'ya') $this->print_blank_char();
-			if($kana[2] == 'yu') $this->print_blank_char();
-			if($kana[0] == 'ゐ') $this->print_blank_char();
+			if($kana[2] == 'ya') $this->print_blank_char(1);
+			if($kana[2] == 'yu') $this->print_blank_char(1);
+			if($kana[2] == 'po'){
+				$this->print_blank_char(1);
+				$this->print_blank_char(1);
+			} 
+			if($kana[0] == 'ゐ') $this->print_blank_char(1);
 			?>
 			<?php echo $add_blank_line ?>
 			<?php $i++; endforeach ?>
@@ -425,17 +506,17 @@ class KanaGenerator{
 
 	private function print_blank_char($practice = false){
 		if($practice) echo '
+			<div class="practice-tile practice-blank">				
+				<div class="practice-character nihongo practice-inner">&nbsp;</div>
+				<div class="practice practice-inner"></div>			
+			</div>';
+		else echo '
 			<div class="character-tile theme-bg-color theme-border-color rounded-8 blank-char">
 				<div class="character-bg-overlay rounded-12 bg-overlay">
 					<div class="character nihongo theme-border-bottom">&nbsp;</div>
 					<div class="character character-alt nihongo theme-border-bottom">&nbsp;</div>
 					<div class="translation">&nbsp;</div>
 				</div>
-			</div>';
-		else echo '
-			<div class="practice-tile practice-blank">				
-				<div class="practice-character nihongo practice-inner">&nbsp;</div>
-				<div class="practice practice-inner"></div>			
 			</div>';
 	}
 
