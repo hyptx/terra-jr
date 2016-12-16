@@ -359,15 +359,6 @@ class KanaGenerator{
 			<?php echo $add_blank_line ?>
 			<?php $i++; endforeach ?>
 		</div>
-		<script type="text/javascript">
-		// jQuery.event.special.tap.emitTapOnTaphold = false;
-		// jQuery('.character-tile').on('tap',function(){
-		// 	var character = jQuery(this).attr('rel');
-		// 	if(character) responsiveVoice.speak(character,'Japanese Female',{rate: .8,pitch: 1.1});
-		// }).on('taphold',function(){
-  		//   jQuery(this).toggleClass('tile-alt');
-		// });
-		</script>
 		<?php
 	}
 
@@ -501,6 +492,33 @@ class KanaGenerator{
 				</div>
 			</div>
 		</div>
+		<?php
+	}
+
+	public function print_kana_match_tiles(){
+		//[] = Hiragana[0],Katakana[1],Hepburn[2],Nihon-shiki[3],Kunrei-shiki[4],section[5],consonant[6],vowel[7]
+		$number_of_tiles = 16;
+		$half_number_of_tiles = $number_of_tiles / 2;
+		$random_tiles = array_rand($this->_kana_array,$half_number_of_tiles); 
+		$random_katakana_tiles = array_rand($this->_kana_array,$half_number_of_tiles);
+		echo '<div id="match-indicator"></div><div id="results" class="rounded-10"></div>';
+		foreach($random_tiles as $tile_key){
+			$match_tile_array[] = array($this->_kana_array[$tile_key][0],$this->_kana_array[$tile_key][2]);
+			$match_tile_array[] = array($this->_kana_array[$tile_key][1],$this->_kana_array[$tile_key][2]);
+		}
+		shuffle($match_tile_array);
+		?>
+		<div id="kana-match" class="character-list-<?php echo $this->_kana_type ?> text-center font-resize responsive-neg-margin<?php if($_GET['spacers'] != 1) echo ' hide-spacers' ?>">
+			<?php $i = 0; foreach($match_tile_array as $kana): ?>
+			<div id="char-<?php echo $i ?>" class="character-tile theme-bg-color theme-border-color rounded-8" onclick="matchTile(this,'<?php echo $kana[1] ?>');">
+				<div class="character-bg-overlay rounded-12 bg-overlay">
+					<div class="character nihongo"><?php echo $kana[0] ?></div>
+					<div class="character character-alt nihongo"><span class="mini-kana"><?php echo $kana[1] ?></span></div>
+				</div>
+			</div>
+			<?php $i++; endforeach ?>
+		</div>
+		<script type="text/javascript">totalTiles = <?php echo $number_of_tiles ?></script>
 		<?php
 	}
 

@@ -119,9 +119,11 @@ textarea{padding:6px; border:1px solid #ccc;}
 .blank-char .character-bg-overlay{opacity: .3}
 .spacer-div{margin:12px 0;}
 .hide-spacers .spacer-div,.hide-spacers .blank-char,.hide-spacers hr.spacer{display:none;}
+#kana-match .character-alt .mini-kana{font-size: .6em; line-height: .6em}
+#kana-match .character{width: 1em}
 
 /* Quiz ~~~~> */
-.page-id-105 .btn-hard,page-id-107 .btn-hard{display: none}
+.page-id-105 .btn-hard,.page-id-107 .btn-hard,.page-id-111 .btn-hard{display: none}
 .page-id-105 #flashcard-control-bar,.page-id-107  #flashcard-control-bar{visibility: hidden;}
 #flashcard-control-bar.tall{height:120px;}
 #quiz-answer-bar-container{position: absolute; text-align: center; width: 100%;}

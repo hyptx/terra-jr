@@ -126,3 +126,45 @@ function checkQuizAnswer(element){
     	jQuery('#flashcard-control-bar,#quiz-answer-bar-container').addClass('tall');
     }
 }
+
+firstChoice = false;
+secondChoice = false;
+clearedTiles = 0;
+function matchTile(element,translation){
+	if(!firstChoice){
+		firstChoice = translation;
+		firstChoiceElement = element;
+		toggleTileKana(element);
+	} 
+	else if(!secondChoice){
+		if(element == firstChoiceElement){
+			alert('You cant choose to match the same tile');
+			return;
+		}
+		secondChoice = translation;
+		secondChoiceElement = element;
+		toggleTileKana(element);
+	} 
+	else{
+		firstChoice = translation;
+		firstChoiceElement = element;
+		secondChoice = false;
+		secondChoiceElement = false;
+		toggleTileKana(element);
+		
+	}
+	if(firstChoice == secondChoice){
+		jQuery(firstChoiceElement).hide(800);
+		jQuery(secondChoiceElement).hide(800);
+		clearedTiles ++;
+
+		if(clearedTiles == (totalTiles / 2)){
+			jQuery('#results').html('Subarashi!<br>I dare you to go again!<br><a class="btn btn-success margin-top" onclick="window.location.reload(); return false;">Start Over</a>');
+			jQuery('#results').show('slow');
+		} 
+	}
+	else if(secondChoice && secondChoice != firstChoice){
+		 setTimeout(function(){ jQuery('.character-tile').removeClass('tile-alt'); },1200); 
+	}
+	//jQuery('#match-indicator').html(clearedTiles + ' out of '+totalTiles);
+}
