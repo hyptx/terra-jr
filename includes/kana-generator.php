@@ -7,6 +7,9 @@ class KanaGenerator{
 	public function __construct($kana_type){
 		$this->_kana_type = $kana_type;
 		$this->store_data();
+		echo '<div style="display:none">';
+		foreach($this->_kana_array as $kana) echo $kana[0] . $kana[1];
+		echo '</div>';
 	}
 
 	private function store_data(){
@@ -508,12 +511,12 @@ class KanaGenerator{
 		}
 		shuffle($match_tile_array);
 		?>
-		<div id="kana-match" class="character-list-<?php echo $this->_kana_type ?> text-center font-resize responsive-neg-margin<?php if($_GET['spacers'] != 1) echo ' hide-spacers' ?>">
+		<div id="kana-match" class="text-center font-resize responsive-neg-margin">
 			<?php $i = 0; foreach($match_tile_array as $kana): ?>
 			<div id="char-<?php echo $i ?>" class="character-tile theme-bg-color theme-border-color rounded-8" onclick="matchTile(this,'<?php echo $kana[1] ?>');">
 				<div class="character-bg-overlay rounded-12 bg-overlay">
 					<div class="character nihongo"><?php echo $kana[0] ?></div>
-					<div class="character character-alt nihongo"><span class="mini-kana"><?php echo $kana[1] ?></span></div>
+					<div class="character character-alt"><span class="mini-kana uppercase"><?php echo $kana[1] ?></span></div>
 				</div>
 			</div>
 			<?php $i++; endforeach ?>

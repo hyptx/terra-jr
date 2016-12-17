@@ -2,7 +2,7 @@
 <?php ter_template_comment(__FILE__) ?>
 <?php the_post() ?>
 <?php require(TER_CHILD_INCLUDES . 'kana-generator.php') ?>
-<?php $kana_generator = new KanaGenerator('hiragana') ?>
+<?php $kana_generator = new KanaGenerator('') ?>
 <header id="app-header" class="theme-bg-color">
 	<div class="container">
 		<div class="row">

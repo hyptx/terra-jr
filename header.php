@@ -24,35 +24,6 @@
 jQuery(document).on("mobileinit", function(){ jQuery.extend(jQuery.mobile,{ ajaxEnabled: false, pushStateEnabled: false,autoInitializePage: false });
     }); </script>
 <script type='text/javascript' src='//cdnjs.cloudflare.com/ajax/libs/jquery-mobile/1.4.5/jquery.mobile.min.js'></script>
-<script type='text/javascript'>
-//Typekit Load
-  (function() {
-    var config = {
-      kitId: 'aco6yvg',
-      scriptTimeout: 3000
-    };
-    var h = document.getElementsByTagName('html')[0];
-    h.className += ' wf-loading';
-    var t = setTimeout(function() {
-      h.className = h.className.replace(/(\s|^)wf-loading(\s|$)/g, ' ');
-      h.className += ' wf-inactive';
-    }, config.scriptTimeout);
-    var d = false;
-    var tk = document.createElement('script');
-    tk.src = '//use.typekit.net/' + config.kitId + '.js';
-    tk.type = 'text/javascript';
-    tk.async = 'true';
-    tk.onload = tk.onreadystatechange = function() {
-      var rs = this.readyState;
-      if (d || rs && rs != 'complete' && rs != 'loaded') return;
-      d = true;
-      clearTimeout(t);
-      try { Typekit.load(config); } catch (e) {}
-    };
-    var s = document.getElementsByTagName('script')[0];
-    s.parentNode.insertBefore(tk, s);
-  })();
-</script>
 <meta name="google-site-verification" content="MFDDM8eAIcEdoueliJAs7aPWprNwzJVpqkz3iP9oj6Q" />
 <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
