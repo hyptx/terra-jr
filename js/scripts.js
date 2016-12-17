@@ -3,8 +3,15 @@ jQuery(document).ready(function(){
 	responsiveVoice.setDefaultVoice('Japanese Female');
 	//Swipe
 	jQuery('#flashcard-swipe').on('slide.bs.carousel', function(){	scrollToAnchor('primary'); });
-	jQuery("#flashcard-swipe").swiperight(function(){ jQuery("#flashcard-swipe").carousel('prev'); });  
-   	jQuery("#flashcard-swipe").swipeleft(function(){ jQuery("#flashcard-swipe").carousel('next'); });
+	jQuery("#flashcard-swipe, #quiz").swiperight(function(){
+	 	jQuery("#flashcard-swipe").carousel('prev'); 
+	 	if(answered == quizItems) jQuery("#quiz").carousel('prev'); 
+	});  
+   	jQuery("#flashcard-swipe, #quiz").swipeleft(function(){
+   	 	jQuery("#flashcard-swipe").carousel('next'); 
+   	 	if(answered == quizItems) jQuery("#quiz").carousel('next'); 
+
+   	});
    	//Smooth Scrolling
   	jQuery(function(){
   		setTimeout(function(){
@@ -40,7 +47,7 @@ function scrollToAnchor(anchor_id){
 }
 
 function toggleKana(){
-    jQuery('#flashcard-swipe .item.active').toggleClass('swap-kana');
+    jQuery('#flashcard-swipe .item.active,#quiz .item.active').toggleClass('swap-kana');
 }
 
 function toggleTileKana(element){
@@ -69,7 +76,7 @@ function toggleFlashcardPlay(element){
 		jQuery(element).removeClass('playing');
 		jQuery(element).removeClass('playing-x2');
 		opt = c.data()['bs.carousel'].options;
-      	opt.interval= 3000;
+      	opt.interval= 4000;
       	c.data({options: opt});
 		flashcardPlaying = false;
 	}
@@ -86,4 +93,78 @@ function toggleFlashcardPlay(element){
 		jQuery('#flashcard-swipe').carousel('cycle');
 		flashcardPlaying = 1;
 	}
-}			
+}
+
+//Quiz
+correctAnswers = 0;
+incorrectAnswers = 0;
+score = 0;
+answered = 0;
+function checkQuizAnswer(element){	
+	jQuery('#quiz .active .quiz-answer').attr('onclick','');
+	answered++;
+    if(jQuery(element).hasClass('correct')){
+    	score++;
+    	jQuery(element).addClass('right');
+    	correctAnswers++;
+    	jQuery('#score-correct').html(correctAnswers);
+    	if(answered != quizItems) setTimeout(function(){ jQuery('#quiz').carousel('next'); },500);
+    }
+    else{
+    	jQuery(element).addClass('wrong');
+    	incorrectAnswers++;
+    	jQuery('#score-incorrect').html(incorrectAnswers);
+    	jQuery('#quiz .active .correct').addClass('right-indicator');
+    	if(answered != quizItems) setTimeout(function(){ jQuery('#quiz').carousel('next'); },2000);
+    }
+
+    if(answered == quizItems){
+    	jQuery('#results').html('<strong>Sugoiyo!</strong> You got ' + correctAnswers + ' out of ' + quizItems + '<br><br>Use the arrows below to review your results.');
+    	jQuery('#results').show('slow');
+    	jQuery('#restart').show('slow');
+    	jQuery('#flashcard-control-bar').css('visibility','visible');
+    	jQuery('#flashcard-control-bar,#quiz-answer-bar-container').addClass('tall');
+    }
+}
+
+firstChoice = false;
+secondChoice = false;
+clearedTiles = 0;
+function matchTile(element,translation){
+	if(!firstChoice){
+		firstChoice = translation;
+		firstChoiceElement = element;
+		toggleTileKana(element);
+	} 
+	else if(!secondChoice){
+		if(element == firstChoiceElement){
+			alert('You cant choose to match the same tile');
+			return;
+		}
+		secondChoice = translation;
+		secondChoiceElement = element;
+		toggleTileKana(element);
+	} 
+	else{
+		firstChoice = translation;
+		firstChoiceElement = element;
+		secondChoice = false;
+		secondChoiceElement = false;
+		toggleTileKana(element);
+		
+	}
+	if(firstChoice == secondChoice){
+		jQuery(firstChoiceElement).hide(800);
+		jQuery(secondChoiceElement).hide(800);
+		clearedTiles ++;
+
+		if(clearedTiles == (totalTiles / 2)){
+			jQuery('#results').html('Subarashi!<br>I dare you to go again!<br><a class="btn btn-success margin-top" onclick="window.location.reload(); return false;">Start Over</a>');
+			jQuery('#results').show('slow');
+		} 
+	}
+	else if(secondChoice && secondChoice != firstChoice){
+		 setTimeout(function(){ jQuery('.character-tile').removeClass('tile-alt'); },1200); 
+	}
+	//jQuery('#match-indicator').html(clearedTiles + ' out of '+totalTiles);
+}

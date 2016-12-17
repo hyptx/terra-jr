@@ -67,9 +67,9 @@ textarea{padding:6px; border:1px solid #ccc;}
 #flashcard-nav li{list-style-type: none; display: inline-block; cursor: pointer; font-size: 22px; padding: 3px; width: 55px; background-color: none; border: 0; height:31px; margin: 0; text-indent: 0; border-radius:16px; -webkit-border-radius:16px;}
 #page #flashcard-nav li.active{color:#fff; background: #444}
 .kana-indicator{display: inline-block;}
-.type-hiragana .character-hiragana,.type-hiragana .swap-kana .character-katakana{display: inline-block; opacity: 1}
+.type-hiragana .character-hiragana,.type-hiragana.swap-kana .character-katakana{display: inline-block; opacity: 1}
 .swap-kana .character-hiragana,.type-hiragana .character-katakana{display: none; opacity: 0}
-.type-katakana .character-katakana,.type-katakana .swap-kana .character-hiragana{display: inline-block; opacity: 1}
+.type-katakana .character-katakana,.type-katakana.swap-kana .character-hiragana{display: inline-block; opacity: 1}
 .swap-kana .character-katakana,.type-katakana .character-hiragana{display: none; opacity: 0}
 .reverse-kana-indicator,.swap-kana .main-indicator{display: none;}
 .swap-kana .reverse-kana-indicator{display: inline-block;}
@@ -95,7 +95,7 @@ textarea{padding:6px; border:1px solid #ccc;}
 .character{font-size: 9em; padding:.3em .1em .1em .1em; line-height: 1em; min-width:1.2em;}
 .translation{font-size: 3em; padding:0.3em .1em .1em; line-height: 1em; text-transform: uppercase;}
 .resize-buttons a{display: inline-block; font-size:18px; padding: 4px 8px 5px; margin-right:2px;}
-.resize-buttons a:hover,.resize-buttons a.active{background: #444; color:#fff;}
+.resize-buttons a:hover,.resize-buttons a.active,.quiz-answer:hover,.quiz-answer:active,.quiz-answer:focus{background: #444; color:#fff;}
 .tile-alt .bg-overlay{background: rgba(255,255,255,.7)}
 .character-alt{display: none}
 .tile-alt .character{display: none;}
@@ -119,13 +119,31 @@ textarea{padding:6px; border:1px solid #ccc;}
 .blank-char .character-bg-overlay{opacity: .3}
 .spacer-div{margin:12px 0;}
 .hide-spacers .spacer-div,.hide-spacers .blank-char,.hide-spacers hr.spacer{display:none;}
+#kana-match .character-alt .mini-kana{font-size: .6em; line-height: .6em}
+#kana-match .character{width: 1em}
 
+/* Quiz ~~~~> */
+.page-id-105 .btn-hard,.page-id-107 .btn-hard,.page-id-111 .btn-hard{display: none}
+.page-id-105 #flashcard-control-bar,.page-id-107  #flashcard-control-bar{visibility: hidden;}
+#flashcard-control-bar.tall{height:120px;}
+#quiz-answer-bar-container{position: absolute; text-align: center; width: 100%;}
+#quiz-answer-bar-container.tall{margin-top:52px;}
+#quiz-answer-bar{padding: 7px 5px 0px; margin-top:20px;}
+.quiz-answer{display: inline-block; font-size:26px; min-width: 48px; padding:2px 5px; margin:0 2px; text-transform: uppercase; cursor: pointer;}
+.quiz-answer.right{background: #75D377; color: #fff}
+.quiz-answer.right-indicator{background: #a0e0a2; color: #fff}
+.quiz-answer.wrong{background: #D3584A; color: #fff}
+#score{position: absolute;  font-size:20px; right:0; left:0;}
+#score-correct{color:#75D377; margin-right:16px;}
+#score-incorrect{color:#D3584A;  margin-left:16px;}
+#results{display: inline-block; background: #75d377; position: absolute; right:0; left:0; padding: 2em; font-size: 18px; text-align: center; z-index: 1; display: none;}
+#restart{text-align: center; display: none; padding-top:7px;}
 /* Practice ~~~~> */
 #practice-sheet{margin:0 auto; width:590px;}
-.practice-tile{position:relative; float:left; border:1px solid #DEDEDE; font-size: 2em;  padding-top: 6px; margin-right:-1px; margin-top: -1px}
-.practice-inner{height: 43px; width: 117px}
+.practice-tile{position:relative; float:left; border:1px solid #DEDEDE; font-size: 2.5em;  margin-right:-1px; margin-top: -1px}
+.practice-inner{height: 45px; width: 117px}
 .practice-character{border-bottom: 1px dotted #DEDEDE}
-.practice-translation{color:#888; font-size: 12px; position: absolute; top:0; right:4px; text-transform: uppercase;}
+.practice-translation{font-size: 12px; position: absolute; top:0; right:4px; text-transform: uppercase; opacity: .5}
 .practice-blank .practice-character{border-bottom:0}
 .page-id-102 .btn-hard,.page-id-99 .btn-hard{display: none}
 
@@ -256,7 +274,7 @@ textarea{padding:6px; border:1px solid #ccc;}
 
 /* Print >~~~~~~~~> */
 @media print {
-   #colophon,#color-bar,#app-header,#header-nav{display: none;}
-   #page{background: #fff}
-   #primary{padding:0;}
+   #colophon,#color-bar,#app-header,#header-nav{display: none!important;}
+   #page{background: #ffffff!important}
+   #primary{padding:6px 0 0!important;}
 }

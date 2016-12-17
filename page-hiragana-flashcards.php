@@ -40,7 +40,7 @@
 						</div>
 						<script type="text/javascript">
 							flashcardPlaying = false;
-							jQuery('#flashcard-swipe').carousel({ interval: 3000 });
+							jQuery('#flashcard-swipe').carousel({ interval: 4000 });
 							jQuery('#flashcard-swipe').carousel('pause');
 						</script>
 					</div><!-- .entry-content -->
