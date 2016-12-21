@@ -10,6 +10,7 @@
 		</div>
 	</div>
 	<?php $kana_generator->print_resize_buttons(1,0,0) ?>
+	<?php //$kana_generator->print_game_piece_buttons() ?>
 </header><!-- .page-header -->
 <div id="main" class="container">
 	<div id="main-row" class="row">

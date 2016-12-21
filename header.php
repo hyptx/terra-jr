@@ -19,6 +19,16 @@
 	<script src="<?php echo TER_JS ?>html5.js" type="text/javascript"></script>
     <script src="<?php echo TER_JS ?>respond.min.js" type="text/javascript"></script>
 <![endif]-->
+<script>
+  (function(d) {
+    var config = {
+      kitId: 'aco6yvg',
+      scriptTimeout: 3000,
+      async: true
+    },
+    h=d.documentElement,t=setTimeout(function(){h.className=h.className.replace(/\bwf-loading\b/g,"")+" wf-inactive";},config.scriptTimeout),tk=d.createElement("script"),f=false,s=d.getElementsByTagName("script")[0],a;h.className+=" wf-loading";tk.src='https://use.typekit.net/'+config.kitId+'.js';tk.async=true;tk.onload=tk.onreadystatechange=function(){a=this.readyState;if(f||a&&a!="complete"&&a!="loaded")return;f=true;clearTimeout(t);try{Typekit.load(config)}catch(e){}};s.parentNode.insertBefore(tk,s)
+  })(document);
+</script>
 <script type="text/javascript">
 //jQuery Mobile
 jQuery(document).on("mobileinit", function(){ jQuery.extend(jQuery.mobile,{ ajaxEnabled: false, pushStateEnabled: false,autoInitializePage: false });

@@ -11,9 +11,9 @@ Template: terra
 */
 
 /* Main ~~~~> */
-.nihongo{transition:opacity 1s; -webkit-transition:opacity 1s;}
-.wf-loading #page .nihongo{opacity: 0}
-.wf-active .nihongo{opacity: 1}
+.nihongo{transition:opacity .5s; -webkit-transition:opacity .5s;}
+.wf-loading #page .nihongo{opacity: 0;}
+.wf-active #page .nihongo{opacity: 1}
 .responsive-neg-margin{margin-left: -15px; margin-right: -15px}
 html{font-size: 100%}
 body{font-style: normal; font-weight: 400; font-size: 15px}
@@ -88,7 +88,7 @@ textarea{padding:6px; border:1px solid #ccc;}
 .playing.playing-x2 .glyphicon-pause{display: inline-block;}
 
 /* Character List ~~~~> */   
-.character-tile{position: relative; display:inline-block; margin: .5em; border-width: 2px; border-style: solid;}
+.character-tile{vertical-align: bottom; position: relative; display:inline-block; margin: .5em; border-width: 2px; border-style: solid;}
 .character-tile *,.character-section *{-webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none;}
 .character-tile .character,.character-tile .translation{cursor: pointer;}
 .character-bg-overlay{padding: .7em;}
@@ -136,7 +136,7 @@ textarea{padding:6px; border:1px solid #ccc;}
 #score{position: absolute;  font-size:20px; right:0; left:0;}
 #score-correct{color:#75D377; margin-right:16px;}
 #score-incorrect{color:#D3584A;  margin-left:16px;}
-#results{display: inline-block; background: #75d377; position: absolute; right:0; left:0; padding: 2em; font-size: 18px; text-align: center; z-index: 1; display: none;}
+#results{display: inline-block; background: #75d377; position: absolute; right:10px; left:10px; padding: 2em; font-size: 18px; text-align: center; z-index: 1; display: none;}
 #restart{text-align: center; display: none; padding-top:7px;}
 /* Practice ~~~~> */
 #practice-sheet{margin:0 auto; width:590px;}

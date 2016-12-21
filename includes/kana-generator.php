@@ -3,8 +3,9 @@
 * KanaGenerator
 */
 class KanaGenerator{
-	private $_kana_type,$_kana_array,$_character_count;
+	private $_get_query,$_kana_type,$_kana_array,$_character_count;
 	public function __construct($kana_type){
+		parse_str($_SERVER['QUERY_STRING'],$this->_get_query);
 		$this->_kana_type = $kana_type;
 		$this->store_data();
 		echo '<div style="display:none">';
@@ -156,7 +157,7 @@ class KanaGenerator{
 			else $active = '';
 			switch($kana[2]) {
 				case 'gc': $translation = '<span class="complex-trans">Geminate Consonant</span>'; break;
-				case 'rduv': $translation = '<span class="complex-trans">Reduplicates/Unvoices</span>'; break;
+				case 'rdu': $translation = '<span class="complex-trans">Reduplicates/Unvoices</span>'; break;
 				case 'rdv': $translation = '<span class="complex-trans">Reduplicates/Voices</span>'; break;
 				default: $translation = $kana[2]; break;
 			}
@@ -499,8 +500,13 @@ class KanaGenerator{
 	}
 
 	public function print_kana_match_tiles(){
-		//[] = Hiragana[0],Katakana[1],Hepburn[2],Nihon-shiki[3],Kunrei-shiki[4],section[5],consonant[6],vowel[7]
-		$number_of_tiles = 16;
+		foreach($this->_kana_array as $key => $value){
+			if($value[2] == 'gc') unset($this->_kana_array[$key]);
+			elseif($value[2] == 'rdu') unset($this->_kana_array[$key]);
+			elseif($value[2] == 'rdv') unset($this->_kana_array[$key]);
+		}		
+		if($_GET['tiles'] && $_GET['tiles'] < 100) $number_of_tiles = $_GET['tiles'];
+		else $number_of_tiles = 16;
 		$half_number_of_tiles = $number_of_tiles / 2;
 		$random_tiles = array_rand($this->_kana_array,$half_number_of_tiles); 
 		$random_katakana_tiles = array_rand($this->_kana_array,$half_number_of_tiles);
@@ -556,7 +562,40 @@ class KanaGenerator{
 	private function print_spacer_qs($switch){
 		echo '?level=' . $_GET['level'] . '&amp;resize=' . $_GET['resize'] . '&amp;random=' . $_GET['random'] . '&amp;spacers=' . $switch;
 	}
+
+	private function add_query_item(){ 
+  		
+	}
+
+	public function print_game_piece_buttons(){
+		$button_type = 'tiles';
+		$number_of_game_pieces = array(10,16,24,32,48);
+		?>
+  		<div class="game-piece-buttons theme-bg-color text-center bold">
+			<div class="bg-overlay-7">
+				<div class="container">
+					<div class="row">
+						<div class="col-sm-12">
+							<?
+							foreach($number_of_game_pieces as $game_piece){
+								$active = $this->check_if_active_button($button_type,16,$game_piece);
+								echo '<a role="button" href="' . $i . '" class="' . $active . '">' . $game_piece . '</a>';
+							}
+							?>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<?php
+	}
 	
+	private function check_if_active_button($button_type,$default_value,$selection_value){
+		if(!$_GET[$button_type] || $_GET[$button_type] == $default_value) return 'active';
+		elseif($_GET[$button_type] == $selection_value) return 'active';
+		else return;  		 
+	}
+
 	private function shuffle_array(){ 
   		$keys = array_keys($this->_kana_array); 
   		shuffle($keys); 
