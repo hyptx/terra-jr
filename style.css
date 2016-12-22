@@ -37,6 +37,7 @@ article{margin-bottom: 15px}
 hr{border-color:#ccc;}
 .back-to-top{bottom: 38px; right: 2px;}
 textarea{padding:6px; border:1px solid #ccc;}
+#page .ginput_container input[type="text"]{border:1px solid #ccc;}
 #speakme-examples .nihongo{cursor: pointer;}
 .table-striped > tbody > tr:nth-child(odd) > td,
 .table-striped > tbody > tr:nth-child(odd) > th {
