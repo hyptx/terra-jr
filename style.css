@@ -1,5 +1,5 @@
 /*
-Theme Name: Terra Jr
+Theme Name: Terra CGF
 Theme URI: https://github.com/hyptx/terra-jr
 Author: Adam J Nowak
 Author URI: http://hyperspatial.com
@@ -11,6 +11,20 @@ Template: terra
 */
 
 /* Main ~~~~> */
+.oscillator{margin: 40px 0; background: #333; padding: 12px; color:#fff;}
+.frequency{margin-bottom: 6px}
+.oscillator .btn{width:130px;}
+.oscillator label{margin:0 2px; font-size: 12px}
+.oscillator input[type="number"]{background:#fdffd6; font-weight: bold;}
+.oscillator input[type="radio"]{}
+.oscillator input[type="range"]{
+background: #58a34e; /* Old browsers */
+background: -moz-linear-gradient(left,  #58a34e 0%, #fcff7f 100%); /* FF3.6-15 */
+background: -webkit-linear-gradient(left,  #58a34e 0%,#fcff7f 100%); /* Chrome10-25,Safari5.1-6 */
+background: linear-gradient(to right,  #58a34e 0%,#fcff7f 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#58a34e', endColorstr='#fcff7f',GradientType=1 ); /* IE6-9 */
+}
+
 /* Header ~~~~> */
 /* Nav ~~~~> */
 /* Home ~~~~> */
@@ -62,6 +76,9 @@ Template: terra
 	.ter-navbar .sub-menu.level-2{padding-left:25px}/* Level-2 Ul Padding */
 	.ter-navbar .sub-menu.level-3{padding-left:20px}/* Level-3 Ul Padding */
 	/* <~~~~~~~~< END Quick Customization */	
+
+	.oscillator .btn{width:165px;}
+	.oscillator label{font-size: 14px; margin:0 10px;}
 }
 
 @media (min-width: 992px){
