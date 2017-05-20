@@ -11,19 +11,27 @@ Template: terra
 */
 
 /* Main ~~~~> */
-.oscillator{margin: 40px 0; background: #333; padding: 12px; color:#fff;}
+.oscillator{margin: 32px 0; padding: 12px; color:#fff;
+background: #333333; /* Old browsers */
+background: -moz-linear-gradient(top,  #333333 0%, #74808c 84%, #50656d 100%); /* FF3.6-15 */
+background: -webkit-linear-gradient(top,  #333333 0%,#74808c 84%,#50656d 100%); /* Chrome10-25,Safari5.1-6 */
+background: linear-gradient(to bottom,  #333333 0%,#74808c 84%,#50656d 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#333333', endColorstr='#50656d',GradientType=0 ); /* IE6-9 */
+}
 .frequency{margin-bottom: 6px}
 .oscillator .btn{width:130px;}
 .oscillator label{margin:0 2px; font-size: 12px}
 .oscillator input[type="number"]{background:#fdffd6; font-weight: bold;}
-.oscillator input[type="radio"]{}
+.oscillator input[type="range"]:focus{border-color:#ccc; -webkit-box-shadow:none; -moz-box-shadow:none; box-shadow:none}
 .oscillator input[type="range"]{
-background: #58a34e; /* Old browsers */
-background: -moz-linear-gradient(left,  #58a34e 0%, #fcff7f 100%); /* FF3.6-15 */
-background: -webkit-linear-gradient(left,  #58a34e 0%,#fcff7f 100%); /* Chrome10-25,Safari5.1-6 */
-background: linear-gradient(to right,  #58a34e 0%,#fcff7f 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#58a34e', endColorstr='#fcff7f',GradientType=1 ); /* IE6-9 */
+background: rgb(51,51,51); /* Old browsers */
+background: -moz-linear-gradient(left,  rgba(51,51,51,1) 0%, rgba(142,216,251,1) 100%); /* FF3.6-15 */
+background: -webkit-linear-gradient(left,  rgba(51,51,51,1) 0%,rgba(142,216,251,1) 100%); /* Chrome10-25,Safari5.1-6 */
+background: linear-gradient(to right,  rgba(51,51,51,1) 0%,rgba(142,216,251,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#333333', endColorstr='#8ed8fb',GradientType=1 ); /* IE6-9 */
 }
+.input-group-addon{cursor: default;}
+.btn .glyphicon{margin-right: 2px}
 
 /* Header ~~~~> */
 /* Nav ~~~~> */
