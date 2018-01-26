@@ -10,6 +10,6 @@
 	</div><!-- /#page -->
 </div><!-- /#page-wrap - Opens in header -->
 <?php do_action('ter_footer') ?>
-<?php wp_footer() ; ter_test_email('adam@atrainmarketing.com')?>
+<?php wp_footer() ?>
 </body>
 </html>
