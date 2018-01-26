@@ -2,12 +2,12 @@
 
 /* Basic Usage Example - Subclass >~~~~> */
 /*
-$skeleton = new Skeleton('skeleton',array('post_type' => 'skeleton','name_singular' => 'Skeleton','name_plural' => 'Skeletons','icon' => TER_CHILD_GRAPHICS . 'favicon-16x16.png'));
+$skeleton_cpt = new Skeleton('skeleton',array('post_type' => 'skeleton','name_singular' => 'Skeleton','name_plural' => 'Skeletons','icon' => TER_CHILD_GRAPHICS . 'favicon-16x16.png'));
 
 class Skeleton extends TerCustomPostType{
 	public function __construct($namespace,$config){
 		 parent::__construct($namespace,$config);
-		 $this->register_taxonomy(); //Optional, creates namespaced taxonomy. Pass argument true to make hierarchal
+		 $this->register_taxonomy($hierarchical = false,$name_singular = false,$name_pural = false, $end_of_slug = false); //Optional, creates namespaced taxonomy. Pass argument true to make hierarchal
 		 $this->setup_meta_boxes(); //Optional, creates meta boxes, overwrite methods in your subclass
 	}
 	//Subclass Methods and Overwrites
@@ -62,19 +62,22 @@ class TerCustomPostType{
 		register_post_type($this->_post_type,$args);
 	}
 	
-	public function register_taxonomy($hierarchical = false){		
+	public function register_taxonomy($hierarchical = false,$name_singular = false,$name_pural = false, $end_of_slug = false){
+		if(!$name_singular)	$name_singular = 'Tag';
+		if(!$name_pural) $name_pural = 'Tags';
+		if(!$end_of_slug) $end_of_slug = 'tags';
 		$labels = array(
-			'name'              => _x($this->_singular . ' Tags', 'taxonomy general name'),
-			'singular_name'     => _x($this->_singular . ' Tag', 'taxonomy singular name'),
-			'search_items'      => __('Search ' . $this->_singular . ' Tags'),
-			'all_items'         => __('All ' . $this->_singular . ' Tags'),
-			'parent_item'       => __('Parent ' . $this->_singular . ' Tag'),
-			'parent_item_colon' => __('Parent ' . $this->_singular . ' Tag:'),
-			'edit_item'         => __('Edit ' . $this->_singular . ' Tag'),
-			'update_item'       => __('Update ' . $this->_singular . ' Tag'),
-			'add_new_item'      => __('Add New ' . $this->_singular . ' Tag'),
-			'new_item_name'     => __('New ' . $this->_singular . ' Tag Name'),
-			'menu_name'         => __($this->_singular . ' Tags')
+			'name'              => _x($this->_singular . ' ' . $name_pural, 'taxonomy general name'),
+			'singular_name'     => _x($this->_singular . ' ' . $name_singular, 'taxonomy singular name'),
+			'search_items'      => __('Search ' . $this->_singular . ' ' . $name_pural),
+			'all_items'         => __('All ' . $this->_singular . ' ' . $name_pural),
+			'parent_item'       => __('Parent ' . $this->_singular . ' ' . $name_singular),
+			'parent_item_colon' => __('Parent ' . $this->_singular . ' ' . $name_singular . ':'),
+			'edit_item'         => __('Edit ' . $this->_singular . ' ' . $name_singular),
+			'update_item'       => __('Update ' . $this->_singular . ' ' . $name_singular),
+			'add_new_item'      => __('Add New ' . $this->_singular . ' ' . $name_singular),
+			'new_item_name'     => __('New ' . $this->_singular . ' ' . $name_singular . ' Name'),
+			'menu_name'         => __($this->_singular . ' ' . $name_pural)
 		);
 		$args = array(
 			'hierarchical'      => $hierarchical,
@@ -83,7 +86,7 @@ class TerCustomPostType{
 			'show_admin_column' => true,
 			'query_var'         => true
 		);
-		register_taxonomy($this->_post_type . '_tags',$this->_post_type,$args);
+		register_taxonomy($this->_post_type . '_' . $end_of_slug,$this->_post_type,$args);
 	}
 	
 	public function updated_messages($messages){
