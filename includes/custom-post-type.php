@@ -7,7 +7,7 @@ $skeleton_cpt = new Skeleton('skeleton',array('post_type' => 'skeleton','name_si
 class Skeleton extends TerCustomPostType{
 	public function __construct($namespace,$config){
 		 parent::__construct($namespace,$config);
-		 $this->register_taxonomy($hierarchical = false,$name_singular = false,$name_pural = false, $end_of_slug = false); //Optional, creates namespaced taxonomy. Pass argument true to make hierarchal
+		 $this->register_taxonomy($hierarchical = false,$name_singular = false,$name_plural = false, $end_of_slug = false); //Optional, creates namespaced taxonomy. Pass argument true to make hierarchal
 		 $this->setup_meta_boxes(); //Optional, creates meta boxes, overwrite methods in your subclass
 	}
 	//Subclass Methods and Overwrites
@@ -62,22 +62,22 @@ class TerCustomPostType{
 		register_post_type($this->_post_type,$args);
 	}
 	
-	public function register_taxonomy($hierarchical = false,$name_singular = false,$name_pural = false, $end_of_slug = false){
+	public function register_taxonomy($hierarchical = false,$name_singular = false,$name_plural = false, $end_of_slug = false){
 		if(!$name_singular)	$name_singular = 'Tag';
-		if(!$name_pural) $name_pural = 'Tags';
+		if(!$name_plural) $name_plural = 'Tags';
 		if(!$end_of_slug) $end_of_slug = 'tags';
 		$labels = array(
-			'name'              => _x($this->_singular . ' ' . $name_pural, 'taxonomy general name'),
+			'name'              => _x($this->_singular . ' ' . $name_plural, 'taxonomy general name'),
 			'singular_name'     => _x($this->_singular . ' ' . $name_singular, 'taxonomy singular name'),
-			'search_items'      => __('Search ' . $this->_singular . ' ' . $name_pural),
-			'all_items'         => __('All ' . $this->_singular . ' ' . $name_pural),
+			'search_items'      => __('Search ' . $this->_singular . ' ' . $name_plural),
+			'all_items'         => __('All ' . $this->_singular . ' ' . $name_plural),
 			'parent_item'       => __('Parent ' . $this->_singular . ' ' . $name_singular),
 			'parent_item_colon' => __('Parent ' . $this->_singular . ' ' . $name_singular . ':'),
 			'edit_item'         => __('Edit ' . $this->_singular . ' ' . $name_singular),
 			'update_item'       => __('Update ' . $this->_singular . ' ' . $name_singular),
 			'add_new_item'      => __('Add New ' . $this->_singular . ' ' . $name_singular),
 			'new_item_name'     => __('New ' . $this->_singular . ' ' . $name_singular . ' Name'),
-			'menu_name'         => __($this->_singular . ' ' . $name_pural)
+			'menu_name'         => __($this->_singular . ' ' . $name_plural)
 		);
 		$args = array(
 			'hierarchical'      => $hierarchical,
