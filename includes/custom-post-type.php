@@ -1,13 +1,13 @@
-<?php /* <~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~< TerCustomPostType - Do not edit >~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~> */
+<?php /* <~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~< TERXCustomPostType - Do not edit >~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~> */
 
 /* Basic Usage Example - Subclass >~~~~> */
 /*
-$skeleton_cpt = new Skeleton('skeleton',array('post_type' => 'skeleton','name_singular' => 'Skeleton','name_plural' => 'Skeletons','icon' => TER_CHILD_GRAPHICS . 'favicon-16x16.png'));
+$skeleton_cpt = new Skeleton('skeleton',array('post_type' => 'skeleton','name_singular' => 'Skeleton','name_plural' => 'Skeletons','icon' => TERX_CHILD_GRAPHICS . 'favicon-16x16.png'));
 
-class Skeleton extends TerCustomPostType{
+class Skeleton extends TERXCustomPostType{
 	public function __construct($namespace,$config){
 		 parent::__construct($namespace,$config);
-		 $this->register_taxonomy($hierarchical = false,$name_singular = false,$name_plural = false, $end_of_slug = false); //Optional, creates namespaced taxonomy. Pass argument true to make hierarchal
+		 $this->register_taxonomy(); //Optional, creates namespaced taxonomy. Pass arguments: $hierarchical = false,$name_singular = false,$name_plural = false, $end_of_slug = false
 		 $this->setup_meta_boxes(); //Optional, creates meta boxes, overwrite methods in your subclass
 	}
 	//Subclass Methods and Overwrites
@@ -15,7 +15,7 @@ class Skeleton extends TerCustomPostType{
 }
 */
 
-class TerCustomPostType{
+class TERXCustomPostType{
 	protected $_hyp_ns,$_config,$_post_type,$_singular,$_singular_lower,$_plural,$_plural_lower;
 	public function __construct($hyp_ns,$config){
 		$this->_hyp_ns = $hyp_ns;	
@@ -62,7 +62,7 @@ class TerCustomPostType{
 		register_post_type($this->_post_type,$args);
 	}
 	
-	public function register_taxonomy($hierarchical = false,$name_singular = false,$name_plural = false, $end_of_slug = false){
+	public function register_taxonomy($hierarchical = false,$name_singular = false,$name_plural = false, $slug = false){
 		if(!$name_singular)	$name_singular = 'Tag';
 		if(!$name_plural) $name_plural = 'Tags';
 		if(!$end_of_slug) $end_of_slug = 'tags';
@@ -86,7 +86,8 @@ class TerCustomPostType{
 			'show_admin_column' => true,
 			'query_var'         => true
 		);
-		register_taxonomy($this->_post_type . '_' . $end_of_slug,$this->_post_type,$args);
+		if($slug) register_taxonomy($slug,$this->_post_type,$args);
+		else register_taxonomy($this->_post_type . '-' . $end_of_slug,$this->_post_type,$args);
 	}
 	
 	public function updated_messages($messages){
@@ -136,20 +137,20 @@ class TerCustomPostType{
 
     public function meta_box_1($post){
 		$value = get_post_meta($post->ID,$this->meta_box_1_key, true);
-		wp_nonce_field(plugin_basename(__FILE__),'hyp_noncename');
+		wp_nonce_field(plugin_basename(__FILE__),'terx_noncename');
 		echo '<label>Generic Label</label><br>';
 		echo '<input type="text" name="' . $this->meta_box_1_key . '" value="' . esc_attr( $value ) . '" style="width:70%" />';
     }
 	
 	public function meta_box_2($post){
-		wp_nonce_field(plugin_basename(__FILE__),'hyp_noncename');
+		wp_nonce_field(plugin_basename(__FILE__),'terx_noncename');
 		$this->print_mce($post->ID,$this->meta_box_2_key);
     }
 	
 	public function save_post($post_id){
 		if(defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) return;
 		if($_POST['post_type'] != $this->_post_type) return $post_id;
-		if(!wp_verify_nonce($_POST['hyp_noncename'],plugin_basename(__FILE__))) return $post_id;
+		if(!wp_verify_nonce($_POST['terx_noncename'],plugin_basename(__FILE__))) return $post_id;
 		if(!current_user_can('edit_post',$post_id)) return $post_id;
 		update_post_meta($post_id,$this->meta_box_1_key,$_POST[$this->meta_box_1_key]);
 		update_post_meta($post_id,$this->meta_box_2_key,$_POST[$this->meta_box_2_key . '_html']);
@@ -197,5 +198,5 @@ class TerCustomPostType{
 			echo '</div>';
 		}
 	}	
-}//END TerCustomPostType
+}//END TERXCustomPostType
 ?>

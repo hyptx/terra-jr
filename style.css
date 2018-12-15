@@ -2,9 +2,9 @@
 Theme Name: Terra Jr
 Theme URI: https://github.com/hyptx/terra-jr
 Author: Adam J Nowak
-Author URI: http://adamjnowak.com
-Description: Terra Theme Child
-Version: 3.3.7.1
+Author URI: https://hyperspatial.com
+Description: A-Train Marketing's Child Theme
+Version: 4.1.3.0
 License: GNU General Public License
 Tags: html5,child theme,responsive,bootstrap,awesome
 Template: terra
@@ -20,47 +20,45 @@ Template: terra
 
 /* Nav ~~~~> */
 /* Quick Customization - Remove for default Bootstrap >~~~~~~~~> */
-.ter-navbar,.ter-navbar .slide-collapse{background:#f8f8f8}/* Nav BG */
-.ter-navbar .navbar-nav li{font-size:16px}/* Container font size */
-.ter-navbar .navbar-nav > li.level-0 > a{font-size:1.2em; padding:10px 15px 10px 15px}/* Level-0 */
-.ter-navbar .navbar-nav .level-1 > li.level-1 > a{font-size:1.1em; padding:10px 15px 10px 25px}/* Level-1 */
-.ter-navbar .navbar-nav .level-2 > li.level-2 > a{font-size:1em; padding:10px 15px 10px 10px}/* Level-2 */
-.ter-navbar .navbar-nav .level-3 > li.level-3 > a{font-size:.9em; padding:10px 15px 10px 10px}/* Level-3 */
-.ter-navbar .navbar-nav .sub-menu{padding:0; border-bottom:1px solid #eee; background:#fff}/* Sub menu styling */
-.ter-navbar .navbar-nav .sub-menu.level-3{border-bottom:1px solid #f8f8f8}/* Level-3 sub menu styling */
-.ter-navbar ul.level-2,.ter-navbar ul.level-3{list-style-type:circle}/* Sub menu list style */
-.ter-navbar .sub-menu.level-2{padding-left:45px}/* Level-2 Ul Padding */
-.ter-navbar .sub-menu.level-3{padding-left:25px}/* Level-3 Ul Padding */	
-.ter-navbar .navbar-toggle:hover,.ter-navbar .navbar-toggle:active,.ter-navbar .navbar-toggle:focus{background:#e6e6e6; transition:background .4s; -webkit-transition:background .4s}/* Menu button */
-#page .ter-navbar .navbar-nav  li > a{color:#777; transition:all .4s; -webkit-transition:all .4s}/* Link Color */	
-#page .ter-navbar .navbar-nav  li > a:hover,.ter-navbar .navbar-nav  li > a:focus{color:#333}/* Link hover highlighting */	
-.ter-navbar .navbar-nav > .open > a,.ter-navbar .navbar-nav > .open > a:hover,.ter-navbar .navbar-nav > .open > a:focus{background:#e6e6e6; color:#333}/* Dropdown Link Highlighting */
-.ter-navbar .navbar-nav .open .dropdown-menu > .active > a,.ter-navbar .navbar-nav .open .dropdown-menu > .active > a:hover,.ter-navbar .navbar-nav .open .dropdown-menu > .active > a:focus,.ter-navbar .navbar-nav .current-menu-item > a{background:#f9f9f9; color:#333}/* Current highlighting */
+.terx-navbar,.terx-navbar .slide-collapse{background:#f8f8f8}/* Nav BG */
+.terx-navbar .navbar-nav > li.level-0 > a{font-size:1rem; padding:.5rem 1rem}/* Level-0 */
+.terx-navbar .navbar-nav .level-1 > li.level-1 > a{font-size:1rem; padding:.5rem 1rem .5rem 1.8rem}/* Level-1 */
+.terx-navbar .navbar-nav .level-2 > li.level-2 > a{font-size:.9rem; padding:.5rem 1rem .5rem .2rem}/* Level-2 */
+.terx-navbar .navbar-nav .level-3 > li.level-3 > a{font-size:.8rem; padding:.5rem 1rem .5rem .2rem}/* Level-3 */
+.terx-navbar .navbar-nav .sub-menu.level-3{border-bottom:1px solid #f8f8f8}/* Level-3 sub menu styling */
+.terx-navbar ul.level-2,.terx-navbar ul.level-3{list-style-type:circle}/* Sub menu list style */
+.terx-navbar .sub-menu.level-2{padding-left:2.9rem}/* Level-2 Ul Padding */
+.terx-navbar .sub-menu.level-3{padding-left:1.3rem}/* Level-3 Ul Padding */	
+.terx-navbar .navbar-toggle:hover,.terx-navbar .navbar-toggle:active,.terx-navbar .navbar-toggle:focus{background:#e6e6e6; transition:background .4s; -webkit-transition:background .4s}/* Menu button */
+#page .terx-navbar .navbar-nav  li > a{color:#777; transition:all .4s; -webkit-transition:all .4s}/* Link Color */	
+#page .terx-navbar .navbar-nav  li > a:hover,.terx-navbar .navbar-nav  li > a:focus{color:#333}/* Link hover highlighting */	
+.terx-navbar .navbar-nav > .open > a,.terx-navbar .navbar-nav > .open > a:hover,.terx-navbar .navbar-nav > .open > a:focus{background:#e6e6e6; color:#333}/* Dropdown Link Highlighting */
+.terx-navbar .navbar-nav .open .dropdown-menu > .active > a,.terx-navbar .navbar-nav .open .dropdown-menu > .active > a:hover,.terx-navbar .navbar-nav .open .dropdown-menu > .active > a:focus,.terx-navbar .navbar-nav .current-menu-item > a{background:#f9f9f9; color:#333}/* Current highlighting */
 /* <~~~~~~~~< END Quick Customization */
 
 /* Footer ~~~~> */
 #colophon .footer-nav-row a{transition:color .4s; -webkit-transition:color .4s}
 
 /* Min Width Media Queries >~~~~~~~~> */
-@media (min-width: 480px){
-	
+@media (min-width: 576px){
+
 }
 
 @media (min-width: 768px){
 	/* Quick Customization - Remove for default Bootstrap >~~~~~~~~> */
 	.dropdown-menu{min-width:200px}
-	.ter-navbar .navbar-nav li{font-size:14px}/* Container font size */
-	.ter-navbar .navbar-nav li.level-0 > a{padding:15px 18px}/* Level-0 padding */
-	.ter-navbar .navbar-nav li.level-0.current-menu-item > a{color:#333; background:#e6e6e6}/* Level-0 current highlighting */
-	.ter-navbar .navbar-nav .level-1 > li.level-1 > a{padding:4px 10px}/* Level-1 padding */
-	.ter-navbar .navbar-nav .level-2 > li.level-2 > a{padding:4px 10px 4px 6px}/* Level-2 padding */
-	.ter-navbar .navbar-nav .level-3 > li.level-3 > a{padding:4px 10px 4px 6px}/* Level-3 padding */
-	.ter-navbar .navbar-nav .dropdown-menu.sub-menu{background:#fff; border:1px solid rgba(0,0,0,.09)}/* Dropdown Style */
-	.ter-navbar .navbar-nav .sub-menu > li > a:hover,.ter-navbar .navbar-nav .sub-menu > li > a:focus{color:#333; background:#f9f9f9}/* Dropdown Hover Highlight */
-	.ter-navbar .navbar-nav .sub-menu{margin-bottom:6px; padding-bottom:6px; border-bottom:1px solid #eee; background:#fff}/* Sub menu Styling */
-	.ter-navbar .navbar-nav .sub-menu.level-3{border-bottom:1px solid #f8f8f8}/* Level-3 sub menu styling */
-	.ter-navbar .sub-menu.level-2{padding-left:25px}/* Level-2 Ul Padding */
-	.ter-navbar .sub-menu.level-3{padding-left:20px}/* Level-3 Ul Padding */
+	.terx-navbar .navbar-nav li{font-size:.8rem}/* Container font size */
+	.terx-navbar .navbar-nav li.level-0 > a{font-size:1rem; padding:.5rem 1rem}/* Level-0 padding */
+	.terx-navbar .navbar-nav li.level-0.current-menu-item > a{color:#333; background:#e6e6e6}/* Level-0 current highlighting */
+	.terx-navbar .navbar-nav .level-1 > li.level-1 > a{font-size:1rem; padding:.5rem 1rem}/* Level-1 padding */
+	.terx-navbar .navbar-nav .level-2 > li.level-2 > a{font-size:.9rem; padding:.5rem 1rem .5rem .2rem}/* Level-2 padding */
+	.terx-navbar .navbar-nav .level-3 > li.level-3 > a{font-size:.8rem; padding:.5rem 1rem .5rem .2rem}/* Level-3 padding */
+	.terx-navbar .navbar-nav .dropdown-menu.sub-menu{background:#fff; border:1px solid rgba(0,0,0,.09)}/* Dropdown Style */
+	.terx-navbar .navbar-nav .sub-menu > li > a:hover,.terx-navbar .navbar-nav .sub-menu > li > a:focus{color:#333; background:#f9f9f9}/* Dropdown Hover Highlight */
+	.terx-navbar .navbar-nav .sub-menu{margin-bottom:.8rem; padding-bottom:.8rem; border-bottom:1px solid #eee; background:#fff}/* Sub menu Styling */
+	.terx-navbar .navbar-nav .sub-menu.level-3{border-bottom:1px solid #f8f8f8}/* Level-3 sub menu styling */
+	.terx-navbar .sub-menu.level-2{padding-left:1.9rem}/* Level-2 Ul Padding */
+	.terx-navbar .sub-menu.level-3{padding-left:1rem}/* Level-3 Ul Padding */
 	/* <~~~~~~~~< END Quick Customization */	
 }
 
@@ -73,19 +71,18 @@ Template: terra
 }
 /* <~~~~~~~~< END Min Width Media Queries */
 
-/* Max Width Media Queries >~~~~~~~~> */
-@media (max-width: 1199px){
-
+/* Max Width Media Queries - USE A MOBILE FIRST APPROACH. ONLY USE MAX WIDTH IN CASES WHERE MIN WIDTH RULES WILL BE TOO NUMEROUS AND A MAX WIDTH FIX IS MORE PRACTICAL) >~~~~~~~~> */
+@media (max-width: 1199.98px) {
 }
 
-@media (max-width: 991px){
-
+@media (max-width: 991.98px){
+	
 }
 
-@media (max-width: 767px){
-
+@media (max-width: 767.98px){
+	
 }
 
-@media (max-width: 479px){
-
+@media (max-width: 575.98px){
+	
 }
