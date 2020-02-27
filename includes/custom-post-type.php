@@ -57,6 +57,7 @@ class TERXCustomPostType{
 			'hierarchical' => 		true,
 			'menu_position' => 		null,
 			'menu_icon' => 			$this->_config['icon'],
+			'show_in_rest' => true,
 			'supports' => 			array('title','editor','author','thumbnail','excerpt','comments','custom-fields','revisions','page-attributes')
 		);
 		register_post_type($this->_post_type,$args);
