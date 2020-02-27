@@ -1,4 +1,8 @@
 <?php
+
+//Turn on submit anchor
+add_filter( 'gform_confirmation_anchor', '__return_true' );
+
 /* <~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~< Extras >~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~> */
 
 /* Custom Post Types - Uncomment to start creating easy CTP's ~~~~> */
