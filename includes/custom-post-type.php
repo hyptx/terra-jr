@@ -85,7 +85,8 @@ class TERXCustomPostType{
 			'labels'            => $labels,
 			'show_ui'           => true,
 			'show_admin_column' => true,
-			'query_var'         => true
+			'query_var'         => true,
+			'show_in_rest' 		=> true,
 		);
 		if($slug) register_taxonomy($slug,$this->_post_type,$args);
 		else register_taxonomy($this->_post_type . '-' . $end_of_slug,$this->_post_type,$args);
