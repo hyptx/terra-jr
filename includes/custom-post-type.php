@@ -63,7 +63,7 @@ class TERXCustomPostType{
 		register_post_type($this->_post_type,$args);
 	}
 	
-	public function register_taxonomy($hierarchical = false,$name_singular = false,$name_plural = false, $slug = false){
+	public function register_taxonomy($hierarchical = false,$name_singular = false,$name_plural = false, $end_of_slug = false){
 		if(!$name_singular)	$name_singular = 'Tag';
 		if(!$name_plural) $name_plural = 'Tags';
 		if(!$end_of_slug) $end_of_slug = 'tags';
@@ -88,8 +88,7 @@ class TERXCustomPostType{
 			'query_var'         => true,
 			'show_in_rest' 		=> true,
 		);
-		if($slug) register_taxonomy($slug,$this->_post_type,$args);
-		else register_taxonomy($this->_post_type . '-' . $end_of_slug,$this->_post_type,$args);
+		register_taxonomy($this->_post_type . '-' . $end_of_slug,$this->_post_type,$args);
 	}
 	
 	public function updated_messages($messages){
