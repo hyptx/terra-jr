@@ -13,7 +13,7 @@
 <?php terx_gtm_body() ?>
 <div id="page-wrap"><!-- Closes in footer -->
 	<div id="page">
-		<?php //See 'terrs/includes/template-tags.php' for nav options
+		<?php //See 'terra/includes/template-tags.php' for nav options
 		terx_nav('slide','header','navbar-expand-md navbar-light bg-light header-navbar');
 		get_template_part('template-parts/header/site','branding');
 		terx_nav('standard','primary','navbar-expand-md navbar-light bg-light',1);		
